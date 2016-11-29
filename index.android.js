@@ -1,37 +1,43 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator
 } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
+
+import Landing from './front/components/Landing.js';
+import Profile from './front/components/Profile.js';
 
 export default class nu extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Router>
+        <Scene key="root">
+          <Scene
+            key="landing"
+            component={Landing}
+            title="Nu.World"
+            initial
+          />
+          <Scene
+            key="profile"
+            component={Profile}
+            title="Your profile"
+          />
+        </Scene>
+      </Router>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  header: {
+    color: 'red',
+    fontSize: 20
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
