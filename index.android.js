@@ -11,23 +11,34 @@ import { Router, Scene } from 'react-native-router-flux';
 import Landing from './front/components/Landing.js';
 import Profile from './front/components/Profile.js';
 
+const TabIcon = ({ selected, title }) => {
+  return (
+      <Text style={{color: selected ? 'red' : 'black'}}>{title}</Text>
+  );
+};
+
 export default class nu extends Component {
   render() {
     return (
       <Router>
         <Scene key="root">
-          <Scene
-            key="landing"
-            component={Landing}
-            title="Nu.World"
-            initial
-          />
-          <Scene
-            key="profile"
-            component={Profile}
-            title="Your profile"
-          />
-        </Scene>
+
+              <Scene
+                key="landing"
+                component={Landing}
+                title="Nu.World"
+                initial
+                hideNavBar
+              />
+              <Scene
+                key="profile"
+                component={Profile}
+                title="Your profile"
+                hideNavBar
+                />
+              </Scene>
+
+
       </Router>
     );
   }

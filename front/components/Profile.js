@@ -15,6 +15,8 @@ export default class Profile extends Component {
           style={stylesProfile.header}
           onPress={() => Actions.landing()}
         >This will be the profile page</Text>
+        <Text>Here you'll have your <Text style={{fontWeight: "bold"}}>NAME</Text></Text>
+        <Text>This will be your state</Text>
       </View>
     )
   }
