@@ -143,9 +143,6 @@ async _userLogout() {
       <TouchableHighlight style={stylesLanding.button} onPress={this._userLogout.bind(this)}>
       <Text style={stylesLanding.buttonText}>Log Out</Text>
       </TouchableHighlight>
-      <TouchableHighlight style={stylesLanding.button} onPress={this._getProtectedQuote.bind(this)}>
-        <Text style={stylesLanding.buttonText}>Do whatever</Text>
-      </TouchableHighlight>
     </View>
     )
   }
