@@ -5,18 +5,26 @@ var logger          = require('morgan'),
     errorhandler    = require('errorhandler'),
     dotenv          = require('dotenv'),
     bodyParser      = require('body-parser'),
-    config          = require('./config'),
+    config          = require('./back/config'),
     _               = require('lodash'),
     jwt             = require('jsonwebtoken'),
     massive         = require('massive');
 
+
+var db = massive.connectSync({
+  connectionString: 'postgres://postgres:' + config.password + '@localhost/nu'
+});
+
 var app = express();
+
+var userRoutes = require('./back/user-routes');
 
 dotenv.load();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+app.set('db', db);
 
 app.use(function(err, req, res, next) {
   if (err.name === 'StatusError') {
@@ -31,7 +39,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(errorhandler())
 }
 
-app.use(require('./user-routes'));
+app.use(userRoutes);
 
 var port = process.env.PORT || 3001;
 

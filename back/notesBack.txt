@@ -7,9 +7,9 @@ psql -U postgres to sign in with postgres username
 ** SCHEMA **
 CREATE TABLE users
 (
-	id INTEGER PRIMARY KEY,
-  first_name TEXT,
-  last_name TEXT,
+	id SERIAL PRIMARY KEY,
+  firstname TEXT,
+  lastname TEXT,
   state VARCHAR(2),
   email TEXT UNIQUE,
   password TEXT,

@@ -4,14 +4,11 @@ var express = require('express'),
     jwt     = require('jsonwebtoken'),
     massive = require('massive');
 
-var app = module.exports = express.Router();
+  var db = massive.connectSync({
+    connectionString: 'postgres://postgres:' + config.password + '@localhost/nu'
+  });
 
-// XXX: This should be a database of users :).
-var users = [{
-  id: 1,
-  username: 'gonto',
-  password: 'gonto'
-}];
+var app = module.exports = express.Router();
 
 function createToken(user) {
   return jwt.sign(_.omit(user, 'password'), config.secret, { expiresIn: 60*60*5 });
@@ -43,26 +40,42 @@ function getUserScheme(req) {
   }
 }
 
-app.post('/users', function(req, res) {
+// app.post('/users', function(req, res) {
+//
+//   var userScheme = getUserScheme(req);
+//
+//   if (!userScheme.username || !req.body.password) {
+//     return res.status(400).send("You must send the username and the password");
+//   }
+//
+//   if (_.find(users, userScheme.userSearch)) {
+//    return res.status(400).send("A user with that username already exists");
+//   }
+//
+//   // Lodash documentation does a great job of explaining what's going on here. Basically, it's just creating a new profile object by pulling the userScheme.type and password variables from the body.
+//   var profile = _.pick(req.body, userScheme.type, 'password', 'extra');
+//
+//   users.push(profile);
+//
+//   res.status(201).json({
+//     id_token: createToken(profile)
+//   });
+// });
 
-  var userScheme = getUserScheme(req);
+app.post('/users', function(req, res, next) {
 
-  if (!userScheme.username || !req.body.password) {
-    return res.status(400).send("You must send the username and the password");
-  }
+  var firstname = req.body.firstname, lastname = req.body.lastname, state = req.body.state, email = req.body.email, password = req.body.password;
 
-  if (_.find(users, userScheme.userSearch)) {
-   return res.status(400).send("A user with that username already exists");
-  }
-
-  var profile = _.pick(req.body, userScheme.type, 'password', 'extra');
-  profile.id = _.max(users, 'id').id + 1;
-
-  users.push(profile);
-
-  res.status(201).json({
-    id_token: createToken(profile)
+  db.create_user([firstname, lastname, state, email, password], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(201).json({
+        id_token: createToken(user)
+      });
+    }
   });
+
 });
 
 app.post('/sessions/create', function(req, res) {
@@ -86,4 +99,8 @@ app.post('/sessions/create', function(req, res) {
   res.status(201).send({
     id_token: createToken(user)
   });
+});
+
+app.get('/users/hello', function(req, res, next) {
+  res.json("hello, you're working!");
 });
