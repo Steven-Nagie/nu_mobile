@@ -7,11 +7,11 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native';
+import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
-// Below only necessary for specific styling of tcomb stuff.
-// import i18n from "tcomb-form-native/lib/i18n/en";
-// import templates from "tcomb-form-native/lib/templates/bootstrap";
+// import {createUser} from '../ducks/userDuck.js';
+
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -38,8 +38,13 @@ let options = {
 // Auth stuff
 let STORAGE_KEY = "id_token";
 
-export default class Landing extends Component {
+class Landing extends Component {
 
+  componentWillMount() {
+    //Here we'll check async storage for token and user information, then automatically pass user onto profile page or whatever.
+  }
+
+  // This is setting the item STORAGE_KEY (named in _userSignup and _userLogin functions) to the value of the id token that we receive in the JSON response when we hit our api for user signup/login.
   async _onValueChange(item, selectedValue) {
     try {
       await AsyncStorage.setItem(item, selectedValue);
@@ -48,8 +53,10 @@ export default class Landing extends Component {
     }
   }
 
+  // I'll cut this out later, but for now it's useful to see how it sends the token in order to get authorization.
   async _getProtectedQuote() {
   var DEMO_TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+  console.log(DEMO_TOKEN);
   fetch("http://192.168.0.79:3001/api/protected/random-quote", {
     method: "GET",
     headers: {
@@ -69,6 +76,7 @@ export default class Landing extends Component {
 
   _userSignup() {
   var value = this.refs.form.getValue();
+  console.log(value);
   if (value) { // if validation fails, value will be null
     fetch("http://192.168.0.79:3001/users", {
       method: "POST",
@@ -83,22 +91,14 @@ export default class Landing extends Component {
     })
     .then(response => response.json())
     .then((response) => {
-      Alert.alert(
-        "Signup Success!",
-        "Click the button to get a Chuck Norris quote!"
-      );
       this._onValueChange(STORAGE_KEY, response.id_token);
+      Alert.alert(
+        "Signup Success!"
+      );
+      // this.props.dispatch(createUser(value);
+      // Actions.profile();
     })
     .done();
-  }
-}
-
-async _userLogout() {
-  try {
-    await AsyncStorage.removeItem(STORAGE_KEY);
-    Alert.alert("Logout Success!")
-  } catch (error) {
-    console.log('AsyncStorage error: ' + error.message);
   }
 }
 
@@ -118,17 +118,29 @@ _userLogin() {
     })
     .then((response) => response.json())
     .then((responseData) => {
+      this._onValueChange(STORAGE_KEY, responseData.id_token);
       Alert.alert(
-        "Login Success!",
-        "Click the button to get a Chuck Norris quote!"
-      ),
-      this._onValueChange(STORAGE_KEY, responseData.id_token)
+        "Login Success!"
+      );
+      Actions.profile();
     })
     .done();
   }
 }
 
+async _userLogout() {
+  try {
+    await AsyncStorage.removeItem(STORAGE_KEY);
+    Alert.alert("Logout Success!")
+  } catch (error) {
+    console.log('AsyncStorage error: ' + error.message);
+  }
+}
+
+  //********** RENDER COMPONENT **************
+
   render() {
+    // console.log(this.props);
     return(
     <View style={stylesLanding.container}>
       <Text style={stylesLanding.header}
@@ -183,3 +195,8 @@ const stylesLanding = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
+
+export default connect( state => ( {
+  user: state.user
+} ) )(Landing);

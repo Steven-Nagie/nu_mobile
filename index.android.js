@@ -7,6 +7,8 @@ import {
   Navigator
 } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
+import { Provider } from 'react-redux';
+import store from "./front/store.js"
 
 import Landing from './front/components/Landing.js';
 import Profile from './front/components/Profile.js';
@@ -20,26 +22,28 @@ const TabIcon = ({ selected, title }) => {
 export default class nu extends Component {
   render() {
     return (
-      <Router>
-        <Scene key="root">
+      <Provider store={ store }>
+        <Router>
+          <Scene key="root">
 
-              <Scene
-                key="landing"
-                component={Landing}
-                title="Nu.World"
-                initial
-                hideNavBar
-              />
-              <Scene
-                key="profile"
-                component={Profile}
-                title="Your profile"
-                hideNavBar
+                <Scene
+                  key="landing"
+                  component={Landing}
+                  title="Nu.World"
+                  initial
+                  hideNavBar
                 />
-              </Scene>
+                <Scene
+                  key="profile"
+                  component={Profile}
+                  title="Your profile"
+                  hideNavBar
+                  />
+                </Scene>
 
 
-      </Router>
+        </Router>
+      </Provider>
     );
   }
 }
