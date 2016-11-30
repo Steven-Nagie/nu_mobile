@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-redux
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add morgan cors http express errorhandler dotenv body-parser
 
 PATH: 
   C:\Users\Steven\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Steven\bin;C:\Python27;C:\Python27\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Skype\Phone;C:\Program Files\nodejs;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Yarn\bin;C:\ProgramData\chocolatey\bin;C:\Ruby22\bin;C:\Users\Steven\AppData\Roaming\npm;C:\Program Files\PostgreSQL\9.6\pgAdmin 4\bin;C:\Program Files\PostgreSQL\9.6\bin;C:\Users\Steven\AppData\Local\atom\bin;C:\Users\Steven\AppData\Local\Android\sdk;C:\Users\Steven\AppData\Local\Yarn\.bin;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\Java\jre1.8.0_111\bin;C:\Users\Steven\AppData\Local\Android\sdk\tools;C:\Users\Steven\AppData\Local\Android\sdk\platform-tools;C:\Users\Steven\AppData\Local\Android\sdk\tools\bin;C:\Program Files\Android\Android Studio\bin;C:\Program Files\Android\Android Studio;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perlHOMEbin
@@ -26,6 +26,7 @@ npm manifest:
   		"react": "~15.4.0-rc.4",
   		"react-native": "0.38.0",
   		"react-native-router-flux": "^3.37.0",
+  		"react-redux": "^4.4.6",
   		"redux": "^3.6.0",
   		"tcomb-form-native": "^0.6.1"
   	},
@@ -2269,6 +2270,10 @@ Lockfile:
     version "2.16.3"
     resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
   
+  hoist-non-react-statics@^1.0.3:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+  
   home-or-tmp@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -2399,7 +2404,7 @@ Lockfile:
       strip-ansi "^3.0.0"
       through "^2.3.6"
   
-  invariant@^2.2.0:
+  invariant@^2.0.0, invariant@^2.2.0:
     version "2.2.2"
     resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
     dependencies:
@@ -3981,6 +3986,15 @@ Lockfile:
       lodash "^4.6.1"
       react-deep-force-update "^1.0.0"
   
+  react-redux@^4.4.6:
+    version "4.4.6"
+    resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.6.tgz#4b9d32985307a11096a2dd61561980044fcc6209"
+    dependencies:
+      hoist-non-react-statics "^1.0.3"
+      invariant "^2.0.0"
+      lodash "^4.2.0"
+      loose-envify "^1.1.0"
+  
   react-static-container@1.0.1:
     version "1.0.1"
     resolved "http://registry.npmjs.org/react-static-container/-/react-static-container-1.0.1.tgz#694c0dd68a896b879519afb548399cc1989c9ab0"
@@ -5233,7 +5247,7 @@ Lockfile:
       chalk "^1.0.0"
 
 Trace: 
-  Error: connect ETIMEDOUT 104.16.63.173:443
+  Error: getaddrinfo ENOENT registry.yarnpkg.com:443
       at Object.exports._errnoException (util.js:870:11)
-      at exports._exceptionWithHostPort (util.js:893:20)
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1061:14)
+      at errnoException (dns.js:32:15)
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:78:26)

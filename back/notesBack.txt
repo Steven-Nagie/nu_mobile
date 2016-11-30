@@ -1,0 +1,17 @@
+psql -U postgres to sign in with postgres username
+
+**Within the user-routes file, you'll have to modify the getUserScheme function to deal with more than just email or username or whatever
+
+**The "friends" column in the users table is a text field. You will have to use JSON to convert it from an object to a string (stringify or parser, one of those two).
+
+** SCHEMA **
+CREATE TABLE users
+(
+	id INTEGER PRIMARY KEY,
+  first_name TEXT,
+  last_name TEXT,
+  state VARCHAR(2),
+  email TEXT UNIQUE,
+  password TEXT,
+  friends TEXT
+)
