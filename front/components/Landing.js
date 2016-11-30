@@ -10,12 +10,12 @@ import {
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
-// import {createUser} from '../ducks/userDuck.js';
+import {createUser} from '../ducks/userDuck.js';
 
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
-t.form.Form.stylesheet.textbox.error.width = 60;
+t.form.Form.stylesheet.textbox.error.width = 100;
 // Set Form
 const Form = t.form.Form;
 
@@ -53,27 +53,6 @@ class Landing extends Component {
     }
   }
 
-  // I'll cut this out later, but for now it's useful to see how it sends the token in order to get authorization.
-  async _getProtectedQuote() {
-  var DEMO_TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
-  console.log(DEMO_TOKEN);
-  fetch("http://192.168.0.79:3001/api/protected/random-quote", {
-    method: "GET",
-    headers: {
-      'Authorization': 'Bearer ' + DEMO_TOKEN
-    }
-  })
-  .then((response) => response.text())
-  .then((quote) => {
-    Alert.alert(
-      "Chuck Norris Quote:", quote,
-      [{text: "Hate it", onPress: () => console.log("The user does not like this quote")},
-      {text: 'Love it', onPress: () => console.log("The user likes this quote")}]
-      );
-  })
-  .done();
-  }
-
   _userSignup() {
   var value = this.refs.form.getValue();
   console.log(value);
@@ -89,14 +68,15 @@ class Landing extends Component {
         password: value.password,
       })
     })
-    .then(response => response.json())
+    // For whatever reason changing from json actually hurts the thing.
+    // .then(response => response.json())
     .then((response) => {
       this._onValueChange(STORAGE_KEY, response.id_token);
       Alert.alert(
         "Signup Success!"
       );
-      // this.props.dispatch(createUser(value);
-      // Actions.profile();
+      this.props.dispatch(createUser(value));
+      Actions.profile();
     })
     .done();
   }
@@ -116,7 +96,7 @@ _userLogin() {
         password: value.password,
       })
     })
-    .then((response) => response.json())
+    // .then((response) => response.json())
     .then((responseData) => {
       this._onValueChange(STORAGE_KEY, responseData.id_token);
       Alert.alert(
@@ -137,10 +117,13 @@ async _userLogout() {
   }
 }
 
+  componentWillReceiveProps(props) {
+    console.log(props);
+  }
   //********** RENDER COMPONENT **************
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return(
     <View style={stylesLanding.container}>
       <Text style={stylesLanding.header}

@@ -5,9 +5,11 @@ import {
   StyleSheet,
   AsyncStorage
 } from 'react-native';
-import { Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-export default class Profile extends Component {
+
+class Profile extends Component {
 
   async _checkUser() {
     console.log('calling _checkUser');
@@ -38,7 +40,7 @@ export default class Profile extends Component {
           style={stylesProfile.header}
           onPress={() => Actions.landing()}
         >This will be the profile page</Text>
-        <Text>Here you'll have your <Text style={{fontWeight: "bold"}}>NAME</Text></Text>
+        <Text>Here you'll have your <Text style={{fontWeight: "bold"}}>{this.props.user.Username}</Text></Text>
         <Text>This will be your state</Text>
       </View>
     )
@@ -57,3 +59,7 @@ const stylesProfile = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   }
 })
+
+export default connect( state => ({
+  user: state.user
+} ) )(Profile);
