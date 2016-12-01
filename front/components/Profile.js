@@ -3,32 +3,44 @@ import {
   View,
   Text,
   StyleSheet,
-  AsyncStorage
+  AsyncStorage,
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import store from 'react-native-simple-store';
 
 
 class Profile extends Component {
 
+/******FUNCTIONS******/
   async _checkUser() {
-    console.log('calling _checkUser');
+    console.log('calling checkuser with store');
     try {
-      const AUTH_TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
-      if (!AUTH_TOKEN) {
-        Actions.landing();
-        Alert.alert('Please log in to access this page');
+      const user = await store.get('user');
+      if (!user) {
+        console.log('There is no store data');
       } else {
-        console.log(AUTH_TOKEN);
+        console.log(user);
       }
     } catch(err) {
       console.log(err);
     }
   }
 
+  async _userLogout() {
+    try {
+      await store.delete('user');
+      Alert.alert("Logout Success!")
+    } catch (error) {
+      console.log('Storage error: ' + error.message);
+    }
+  }
+
+/*******COMPONENT FUNCTIONS********/
   componentWillMount() {
-    console.log('Profile component mounted');
-    // this._checkUser();
+    this._checkUser();
   }
 
   //******* RENDER COMPONENT *******
@@ -40,8 +52,11 @@ class Profile extends Component {
           style={stylesProfile.header}
           onPress={() => Actions.landing()}
         >This will be the profile page</Text>
-        <Text>Here you'll have your <Text style={{fontWeight: "bold"}}>{this.props.user.Username}</Text></Text>
-        <Text>This will be your state</Text>
+        <Text>Here you'll have your name: <Text style={{fontWeight: "bold"}}>{this.props.user.firstname}</Text></Text>
+        <Text>This will be your state: {this.props.user.state}</Text>
+        <TouchableHighlight style={stylesProfile.button} onPress={this._userLogout.bind(this)}>
+          <Text style={stylesProfile.buttonText}>Log Out</Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -57,6 +72,21 @@ const stylesProfile = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
   }
 })
 

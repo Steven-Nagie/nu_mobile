@@ -20,4 +20,10 @@ fetch("http://192.168.0.79:3001/api/protected/random-quote", {
 .done();
 }
 
-When user puts in state, you will have to make sure to push it to all uppercase. Do we want to capitalize the first letter of everyone's first and last name or simply leave it like they give it to us? 
+When user puts in state, you will have to make sure to push it to all uppercase. Do we want to capitalize the first letter of everyone's first and last name or simply leave it like they give it to us?
+
+Hacky logout:
+tell store that user wants Out
+push to landing page
+on landing page componentWillMount, have landing page check store for status flag
+then delete token

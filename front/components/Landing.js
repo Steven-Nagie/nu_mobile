@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import {createUser} from '../ducks/userDuck.js';
+import store from 'react-native-simple-store'
 
 
 // Modify form width
@@ -20,14 +21,17 @@ t.form.Form.stylesheet.textbox.error.width = 100;
 const Form = t.form.Form;
 
 const SignIn = t.struct({
-  "Username": t.String,
-  'Password': t.String
+  "firstname": t.String,
+  "lastname": t.String,
+  "state": t.String,
+  "email": t.String,
+  "password": t.String
 });
 
 let options = {
   auto: 'placeholders',
   fields: {
-    'Password': {
+    'password': {
       secureTextEntry: true
     }
   }
@@ -40,23 +44,38 @@ let STORAGE_KEY = "id_token";
 
 class Landing extends Component {
 
-  componentWillMount() {
-    //Here we'll check async storage for token and user information, then automatically pass user onto profile page or whatever.
+  async _checkUser() {
+    console.log('calling checkuser with store');
+    try {
+      const user = await store.get('user');
+      if (!user) {
+        console.log('There is no store data');
+      } else {
+        console.log(user);
+      }
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  // This is setting the item STORAGE_KEY (named in _userSignup and _userLogin functions) to the value of the id token that we receive in the JSON response when we hit our api for user signup/login.
-  async _onValueChange(item, selectedValue) {
-    try {
-      await AsyncStorage.setItem(item, selectedValue);
-    } catch (error) {
-      console.log('AsyncStorage error: ' + error.message);
-    }
+  _saveUser(first, last, state, email) {
+    store.save('user', {
+      firstname: first,
+      lastname: last,
+      state: state,
+      email: email
+    });
+  }
+
+  componentWillMount() {
+    //Here we'll check async storage for token and user information, then automatically pass user onto profile page or whatever.
+    this._checkUser();
   }
 
   _userSignup() {
   var value = this.refs.form.getValue();
-  console.log(value);
   if (value) { // if validation fails, value will be null
+    this._saveUser(value.firstname, value.lastname, value.state, value.email);
     fetch("http://192.168.0.79:3001/users", {
       method: "POST",
       headers: {
@@ -64,14 +83,19 @@ class Landing extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: value.username,
-        password: value.password,
+        firstname: value.firstname,
+        lastname: value.lastname,
+        state: value.state,
+        email: value.email,
+        password: value.password
       })
     })
     // For whatever reason changing from json actually hurts the thing.
-    // .then(response => response.json())
+    .then(response => response.json())
     .then((response) => {
-      this._onValueChange(STORAGE_KEY, response.id_token);
+      store.update('user', {
+        STORAGE_KEY: response.id_token
+      });
       Alert.alert(
         "Signup Success!"
       );
@@ -92,13 +116,15 @@ _userLogin() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: value.username,
+        username: value.firstname,
         password: value.password,
       })
     })
     // .then((response) => response.json())
     .then((responseData) => {
-      this._onValueChange(STORAGE_KEY, responseData.id_token);
+      store.update('user', {
+        STORAGE_KEY: response.id_token
+      });
       Alert.alert(
         "Login Success!"
       );
@@ -108,22 +134,9 @@ _userLogin() {
   }
 }
 
-async _userLogout() {
-  try {
-    await AsyncStorage.removeItem(STORAGE_KEY);
-    Alert.alert("Logout Success!")
-  } catch (error) {
-    console.log('AsyncStorage error: ' + error.message);
-  }
-}
-
-  componentWillReceiveProps(props) {
-    console.log(props);
-  }
   //********** RENDER COMPONENT **************
 
   render() {
-    console.log(this.props);
     return(
     <View style={stylesLanding.container}>
       <Text style={stylesLanding.header}
@@ -139,9 +152,6 @@ async _userLogout() {
       </TouchableHighlight>
       <TouchableHighlight style={stylesLanding.button} onPress={this._userLogin.bind(this)}>
       <Text style={stylesLanding.buttonText}>Log In</Text>
-      </TouchableHighlight>
-      <TouchableHighlight style={stylesLanding.button} onPress={this._userLogout.bind(this)}>
-      <Text style={stylesLanding.buttonText}>Log Out</Text>
       </TouchableHighlight>
     </View>
     )
