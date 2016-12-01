@@ -7,13 +7,16 @@ import {
   Navigator
 } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import store from "./front/store.js"
 
 /************IMPORT COMPONENTS***********/
 import Landing from './front/components/Landing.js';
 import Profile from './front/components/Profile.js';
 import Calculator from './front/components/calculator/Calculator.js';
+import CalculatorLanding from "./front/components/calculator/CalculatorLanding.js";
+import Transport from "./front/components/calculator/Transport";
+
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -21,11 +24,13 @@ const TabIcon = ({ selected, title }) => {
   );
 };
 
+const RouterWithRedux = connect()(Router);
+
 export default class nu extends Component {
   render() {
     return (
       <Provider store={ store }>
-        <Router>
+        <RouterWithRedux>
           <Scene key="root">
 
                 {/*<Scene
@@ -43,14 +48,15 @@ export default class nu extends Component {
                 />*/}
                 <Scene
                   key="calculator"
-                  component={Calculator}
+                  component={Transport}
                   title="Carbon Calculator"
                   initial
                   hideNavBar
-                />
+                >
+                </Scene>
 
           </Scene>
-        </Router>
+        </RouterWithRedux>
       </Provider>
     );
   }

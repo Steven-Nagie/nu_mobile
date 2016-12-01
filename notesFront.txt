@@ -1,3 +1,6 @@
+Samsung s5 ratio is 360X640
+**Probably better to do it in flex, isn't it?
+
 This is how to send the token in order to get authorization.
 
 async _getProtectedQuote() {
@@ -27,3 +30,10 @@ tell store that user wants Out
 push to landing page
 on landing page componentWillMount, have landing page check store for status flag
 then delete token
+
+
+  <Scene
+    key="calculatorLanding"
+    component={CalculatorLanding}
+    title="Calculator Landing"
+  />

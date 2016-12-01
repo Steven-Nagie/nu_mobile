@@ -11,15 +11,27 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
+import { Router, Scene } from 'react-native-router-flux';
+
+import CalculatorLanding from "./CalculatorLanding.js";
+
 
 class Calculator extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    console.log(this.props.children)
+    console.log(CalculatorLanding)
+  }
 
   render() {
     return(
       <View style={stylesCalculator.container}>
         <Text style={stylesCalculator.header}>Here's the calculator</Text>
         <View style={stylesCalculator.smallContainer}>
-          <Text>Here's where each component will go</Text>
+          <CalculatorLanding />
         </View>
       </View>
     )
@@ -29,7 +41,8 @@ class Calculator extends Component {
 
 const stylesCalculator = StyleSheet.create({
   header: {
-    color: 'red'
+    color: 'red',
+    flex: .2
   },
   container: {
     flex: 1,
@@ -38,10 +51,12 @@ const stylesCalculator = StyleSheet.create({
     backgroundColor: 'blue'
   },
   smallContainer: {
+    flex: .8,
     width: 300,
-    height: 500,
     bottom: 30,
-    backgroundColor: 'green'
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
