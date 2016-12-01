@@ -10,8 +10,10 @@ import { Router, Scene } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import store from "./front/store.js"
 
+/************IMPORT COMPONENTS***********/
 import Landing from './front/components/Landing.js';
 import Profile from './front/components/Profile.js';
+import Calculator from './front/components/calculator/Calculator.js';
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -26,7 +28,7 @@ export default class nu extends Component {
         <Router>
           <Scene key="root">
 
-                <Scene
+                {/*<Scene
                   key="landing"
                   component={Landing}
                   title="Nu.World"
@@ -38,10 +40,16 @@ export default class nu extends Component {
                   component={Profile}
                   title="Your profile"
                   hideNavBar
-                  />
-                </Scene>
+                />*/}
+                <Scene
+                  key="calculator"
+                  component={Calculator}
+                  title="Carbon Calculator"
+                  initial
+                  hideNavBar
+                />
 
-
+          </Scene>
         </Router>
       </Provider>
     );

@@ -57,6 +57,11 @@ class Profile extends Component {
         <TouchableHighlight style={stylesProfile.button} onPress={this._userLogout.bind(this)}>
           <Text style={stylesProfile.buttonText}>Log Out</Text>
         </TouchableHighlight>
+        <TouchableHighlight
+          style={stylesProfile.button}
+          onPress={Actions.calculator}>
+          <Text style={stylesProfile.buttonText}>Go to calculator</Text>
+        </TouchableHighlight>
       </View>
     )
   }

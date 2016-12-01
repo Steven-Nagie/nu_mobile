@@ -107,31 +107,33 @@ class Landing extends Component {
 }
 
 _userLogin() {
-  var value = this.refs.form.getValue();
-  if (value) { // if validation fails, value will be null
-    fetch("http://192.168.0.79:3001/sessions/create", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: value.firstname,
-        password: value.password,
-      })
-    })
-    // .then((response) => response.json())
-    .then((responseData) => {
-      store.update('user', {
-        STORAGE_KEY: response.id_token
-      });
-      Alert.alert(
-        "Login Success!"
-      );
-      Actions.profile();
-    })
-    .done();
-  }
+  /****For simplicity's sake during development, I simply push the user to profile page if there is a token. ****/
+  Actions.profile();
+  // var value = this.refs.form.getValue();
+  // if (value) { // if validation fails, value will be null
+  //   fetch("http://192.168.0.79:3001/sessions/create", {
+  //     method: "POST",
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       username: value.firstname,
+  //       password: value.password,
+  //     })
+  //   })
+  //   // .then((response) => response.json())
+  //   .then((responseData) => {
+  //     store.update('user', {
+  //       STORAGE_KEY: response.id_token
+  //     });
+  //     Alert.alert(
+  //       "Login Success!"
+  //     );
+  //     Actions.profile();
+  //   })
+  //   .done();
+  // }
 }
 
   //********** RENDER COMPONENT **************
