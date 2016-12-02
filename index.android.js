@@ -11,6 +11,7 @@ import { Provider, connect } from 'react-redux';
 import store from "./front/store.js"
 
 /************IMPORT COMPONENTS***********/
+import Header from './front/components/Header';
 import Landing from './front/components/Landing.js';
 import Profile from './front/components/Profile.js';
 import Calculator from './front/components/calculator/Calculator.js';
@@ -41,13 +42,13 @@ export default class nu extends Component {
                   key="landing"
                   component={Landing}
                   title="Nu.World"
-                  initial
                   hideNavBar
                 />
                 <Scene
                   key="profile"
                   component={Profile}
                   title="Your profile"
+                  initial
                   hideNavBar
                 />
                 <Scene

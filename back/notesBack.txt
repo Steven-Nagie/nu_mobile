@@ -2,7 +2,7 @@ psql -U postgres to sign in with postgres username
 
 **Within the user-routes file, you'll have to modify the getUserScheme function to deal with more than just email or username or whatever
 
-**Delete friends row in users table and create a separate friends table with the three ids like Reid showed you.
+**Delete friends column in users table and create a separate friends table with the three ids like Reid showed you.
 
 ** SCHEMA **
 CREATE TABLE users
@@ -28,12 +28,3 @@ CREATE TABLE scores
 	userId INTEGER
 		REFERENCES users(id)
 )
-
-
-
-
-**FOR FRIDAY**
-Make it so that creating a user simultaneously creates a scores row with their id. This will allow us to properly modify the row with their foreign key id when we get new score information from one of the calculator screens.
-
-Create the scores table and connect massive all the way
-	--Create a single put function that parses req.body looking for the relevant information. Alternatively, we could have a different endpoint for each section of the calculator.

@@ -53,6 +53,8 @@ class Landing extends Component {
         console.log('There is no store data');
       } else {
         console.log(user);
+        this.props.dispatch(createUser(user));
+        Actions.profile();
       }
     } catch(err) {
       console.log(err);
@@ -103,7 +105,7 @@ class Landing extends Component {
         );
         // This is to push the user to the redux. However, I'm now sure that's necessary, since we're using the store package. Also, this value has the password, which is bad.
         this.props.dispatch(createUser(_.pick(value, ['firstname', 'lastname', 'state', 'id'])));
-        Actions.transport();
+        Actions.profile();
       }
     })
     .done();

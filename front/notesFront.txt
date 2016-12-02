@@ -1,6 +1,8 @@
 Samsung s5 ratio is 360X640
 **Probably better to do it in flex, isn't it?
 
+Font sizes need to be about three times as large as they are on the mobile wireframes in order to look right due to the difference in logical and real pixel ratios. 
+
 This is how to send the token in order to get authorization.
 
 async _getProtectedQuote() {
@@ -37,6 +39,3 @@ then delete token
     component={CalculatorLanding}
     title="Calculator Landing"
   />
-
-
-  
