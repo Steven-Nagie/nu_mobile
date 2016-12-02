@@ -15,13 +15,22 @@ import store from 'react-native-simple-store';
 export default class CalculatorLanding extends Component {
   render() {
     return(
-      <Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>
         Here's some interesting stuff.
       </Text>
+    </View>
     )
   }
 }
 
-const stylesCalcLanding = StyleSheet.create({
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'red'
+  }
 })

@@ -79,13 +79,26 @@ export default class nu extends Component {
                   component={Energy}
                   title="Energy Calculator"
                   hideNavBar
-                />*/}
+                />
                 <Scene
                   key="food"
                   component={Food}
                   title="Food Calculator"
                   hideNavBar
-                />
+                />*/}
+                <Scene
+                  key="calculator"
+                  component={Calculator}
+                  title="Calculator"
+                  hideNavBar
+                >
+                  <Scene
+                    key="calcLanding"
+                    component={CalculatorLanding}
+                    title="Welcome to the Carbon Calculator"
+                    hideNavBar
+                  />
+                </Scene>
 
 
           </Scene>

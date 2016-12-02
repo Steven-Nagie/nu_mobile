@@ -11,9 +11,7 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
-import { Router, Scene } from 'react-native-router-flux';
-
-import CalculatorLanding from "./CalculatorLanding.js";
+import { DefaultRenderer } from 'react-native-router-flux';
 
 
 class Calculator extends Component {
@@ -22,8 +20,6 @@ class Calculator extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.children)
-    console.log(CalculatorLanding)
   }
 
   render() {
@@ -31,7 +27,7 @@ class Calculator extends Component {
       <View style={stylesCalculator.container}>
         <Text style={stylesCalculator.header}>Here's the calculator</Text>
         <View style={stylesCalculator.smallContainer}>
-          <CalculatorLanding />
+          <DefaultRenderer navigationState={this.props.children[0]} onNavigate={this.props.onNavigate} />
         </View>
       </View>
     )
