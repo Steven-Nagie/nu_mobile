@@ -79,7 +79,7 @@ class Water extends Component {
   _sendWater() {
     totalScore += waterScore;
     // Save score to simple-store
-    store.save('score', {
+    store.update('score', {
       total: totalScore,
       water: waterScore
     });

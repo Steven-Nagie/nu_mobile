@@ -30,3 +30,18 @@ app.put('/scores/water', function(req, res, next) {
   console.log(req.body);
   res.sendStatus(200);
 });
+
+app.put('/scores/waste', function(req, res, next) {
+  console.log(req.body);
+  res.sendStatus(200);
+});
+
+app.put('/scores/food', function(req, res, next) {
+  console.log("food", req.body);
+  res.sendStatus(200);
+});
+
+app.put('/scores/energy', function(req, res, next) {
+  console.log(req.body);
+  res.sendStatus(200);
+});

@@ -18,15 +18,129 @@ t.form.Form.stylesheet.textbox.error.width = 100;
 // Set Form
 const Form = t.form.Form;
 
+const wasteForm = t.struct({
+  "metal": t.Boolean,
+  "plastic": t.Boolean,
+  "glass": t.Boolean,
+  "newspaper": t.Boolean,
+  "magazines": t.Boolean,
+});
+let options = {
+
+};
+
+let totalScore;
+let AUTH_TOKEN;
+let wasteScore = 58;
+
 class Waste extends Component {
+
+  async _checkUser() {
+    try {
+      const user = await store.get('user');
+      if(!user) {
+        //In actual app you would want to shoot user back to sign in page.
+        // Actions.landing();
+        console.log('There is no store data');
+      } else {
+        AUTH_TOKEN = user.STORAGE_KEY;
+        console.log(user);
+        console.log('this is the auth token ', AUTH_TOKEN)
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  /****Get the total score*****/
+  async _getScore() {
+    try{
+      const score = await store.get('score');
+      console.log(score);
+      if (score) {
+        totalScore = score.total;
+        console.log(totalScore);
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  /*****CALCULATIONS******/
+  _wasteCalc() {
+    var answers = this.refs.form.getValue();
+    console.log(answers);
+    if (answers.metal) {
+      wasteScore -= 7
+    }
+
+    if (answers.plastic) {
+      wasteScore -= 3
+    }
+
+    if (answers.glass) {
+      wasteScore -= 2
+    }
+
+    if (answers.newspaper) {
+      wasteScore -= 9
+    }
+
+    if (answers.magazines) {
+      wasteScore -= 2
+    }
+
+    this._sendWaste();
+  }
+
+
+  _sendWaste() {
+    totalScore += wasteScore;
+    // Save score to simple-store
+    store.update('score', {
+      total: totalScore,
+      waste: wasteScore
+    });
+    //Send score to database
+    fetch("http://192.168.0.79:3001/scores/waste", {
+      method: "PUT",
+      headers: {
+        'Authorization': 'Bearer ' + AUTH_TOKEN,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        total: totalScore,
+        waste: wasteScore
+      })
+    })
+    .done();
+
+  }
+
+  /********Component functions**********/
+  componentWillMount() {
+    this._getScore();
+    this._checkUser();
+  }
+
   render() {
     return(
-
+      <View>
+        <Text sytle={stylesWaste.text}>Recycling is great for the planet! Which of the following materials do you regularly recycle?</Text>
+        <Form
+          ref="form"
+          type={wasteForm}
+          options={options}
+        />
+        <TouchableHighlight style={stylesWaste.button}
+          onPress={this._wasteCalc.bind(this)}>
+          <Text>Submit</Text>
+        </TouchableHighlight>
+      </View>
     )
-  } //End render
-
+  }
 }
-
 
 const stylesWaste = StyleSheet.create({
   container: {
@@ -48,7 +162,7 @@ const stylesWaste = StyleSheet.create({
     padding: 20,
     backgroundColor: 'blue'
   }
-})
+});
 
 export default connect(state => ({
   user: state.user

@@ -18,6 +18,8 @@ import CalculatorLanding from "./front/components/calculator/CalculatorLanding.j
 import Transport from "./front/components/calculator/Transport";
 import Water from "./front/components/calculator/Water";
 import Waste from "./front/components/calculator/Waste";
+import Food from "./front/components/calculator/Food";
+import Energy from "./front/components/calculator/Energy";
 
 
 const TabIcon = ({ selected, title }) => {
@@ -65,13 +67,26 @@ export default class nu extends Component {
                   component={Water}
                   title="Water Calculator"
                   hideNavBar
-                />*/}
+                />
                 <Scene
                   key="waste"
                   component={Waste}
                   title="Waste Calculator"
                   hideNavBar
                 />
+                <Scene
+                  key="energy"
+                  component={Energy}
+                  title="Energy Calculator"
+                  hideNavBar
+                />*/}
+                <Scene
+                  key="food"
+                  component={Food}
+                  title="Food Calculator"
+                  hideNavBar
+                />
+
 
           </Scene>
         </RouterWithRedux>
