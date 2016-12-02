@@ -16,6 +16,8 @@ import Profile from './front/components/Profile.js';
 import Calculator from './front/components/calculator/Calculator.js';
 import CalculatorLanding from "./front/components/calculator/CalculatorLanding.js";
 import Transport from "./front/components/calculator/Transport";
+import Water from "./front/components/calculator/Water";
+import Waste from "./front/components/calculator/Waste";
 
 
 const TabIcon = ({ selected, title }) => {
@@ -45,15 +47,31 @@ export default class nu extends Component {
                   component={Profile}
                   title="Your profile"
                   hideNavBar
-                />*/}
+                />
                 <Scene
                   key="calculator"
-                  component={Transport}
-                  title="Carbon Calculator"
-                  initial
+                  component={Calculator}
+                  title="Calculator"
                   hideNavBar
-                >
-                </Scene>
+                />
+                <Scene
+                  key="transport"
+                  component={Transport}
+                  title="Transportation Calculator"
+                  hideNavBar
+                />
+                <Scene
+                  key="water"
+                  component={Water}
+                  title="Water Calculator"
+                  hideNavBar
+                />*/}
+                <Scene
+                  key="waste"
+                  component={Waste}
+                  title="Waste Calculator"
+                  hideNavBar
+                />
 
           </Scene>
         </RouterWithRedux>

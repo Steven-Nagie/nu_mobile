@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-simple-store
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add express-jwt
 
 PATH: 
   C:\Users\Steven\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Steven\bin;C:\Python27;C:\Python27\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Skype\Phone;C:\Program Files\nodejs;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Yarn\bin;C:\ProgramData\chocolatey\bin;C:\Ruby22\bin;C:\Users\Steven\AppData\Roaming\npm;C:\Program Files\PostgreSQL\9.6\pgAdmin 4\bin;C:\Program Files\PostgreSQL\9.6\bin;C:\Users\Steven\AppData\Local\atom\bin;C:\Users\Steven\AppData\Local\Android\sdk;C:\Users\Steven\AppData\Local\Yarn\.bin;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\Java\jre1.8.0_111\bin;C:\Users\Steven\AppData\Local\Android\sdk\tools;C:\Users\Steven\AppData\Local\Android\sdk\platform-tools;C:\Users\Steven\AppData\Local\Android\sdk\tools\bin;C:\Program Files\Android\Android Studio\bin;C:\Program Files\Android\Android Studio;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perlHOMEbin
@@ -36,6 +36,7 @@ npm manifest:
   		"react": "~15.4.0-rc.4",
   		"react-native": "0.38.0",
   		"react-native-router-flux": "^3.37.0",
+  		"react-native-simple-store": "^1.1.0",
   		"react-redux": "^4.4.6",
   		"redux": "^3.6.0",
   		"tcomb-form-native": "^0.6.1"
@@ -3351,6 +3352,10 @@ Lockfile:
       lodash.isarguments "^3.0.0"
       lodash.isarray "^3.0.0"
   
+  lodash.merge@^4.6.0:
+    version "4.6.0"
+    resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
+  
   lodash.once@^4.0.0:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
@@ -4203,6 +4208,12 @@ Lockfile:
       react-native-experimental-navigation "0.26.x"
       react-native-tabs "^1.0.9"
       react-static-container "1.0.1"
+  
+  react-native-simple-store@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/react-native-simple-store/-/react-native-simple-store-1.1.0.tgz#69e91d6b91d362cd4ea12b0486df3eaf2f628b04"
+    dependencies:
+      lodash.merge "^4.6.0"
   
   react-native-tabs@^1.0.9:
     version "1.0.9"
@@ -5603,5 +5614,5 @@ Lockfile:
       chalk "^1.0.0"
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Steven\Documents\DevMtn\myProject\nu\node_modules\ast-query\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Steven\Documents\DevMtn\myProject\nu\node_modules\acorn-jsx\node_modules\.bin'
       at Error (native)

@@ -17,7 +17,9 @@ var db = massive.connectSync({
 
 var app = express();
 
+/********IMPORT CONTROLLERS*********/
 var userRoutes = require('./back/user-routes');
+var scoreRoutes = require('./back/score-routes');
 
 dotenv.load();
 
@@ -40,6 +42,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(userRoutes);
+app.use(scoreRoutes);
 
 var port = process.env.PORT || 3001;
 

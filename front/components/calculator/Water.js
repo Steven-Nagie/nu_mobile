@@ -18,20 +18,18 @@ t.form.Form.stylesheet.textbox.error.width = 100;
 // Set Form
 const Form = t.form.Form;
 
-const airForm = t.struct({
-  "totalFlights": t.Number
+const waterForm = t.struct({
+  "totalGallons": t.Number
 });
 let options = {
 
 };
 
-
-var transportScore = 0;
-var totalScore = 0;
-
+let totalScore;
+let waterScore;
 let AUTH_TOKEN;
 
-class Transport extends Component {
+class Water extends Component {
 
   async _checkUser() {
     try {
@@ -50,29 +48,43 @@ class Transport extends Component {
     }
   }
 
-
-  /**********CALCULATOR FUNCTIONS********/
-  _yes() {
-    transportScore += 1021;
-    console.log("transport score with a yes: ", transportScore);
+  /****Get the total score*****/
+  async _getScore() {
+    try{
+      const score = await store.get('score');
+      console.log(score);
+      if (score) {
+        totalScore = score.total;
+        console.log(totalScore);
+      }
+    } catch(err) {
+      console.log(err);
+    }
   }
-  _no() {
-    console.log("transport score with a no: ", transportScore);
+
+  /*******Calculations******/
+  _waterCalc() {
+    var gallons = this.refs.form.getValue();
+    waterScore = gallons.totalGallons * 0.0052;
+    console.log("Here's the calculated total: ", waterScore);
+    this._sendWater();
   }
 
-  async _airCalc() {
-    var flights = this.refs.form.getValue();
-    var flightTotal = flights.totalFlights * 715;
-    transportScore += flightTotal;
-    totalScore += transportScore;
-    console.log(transportScore, totalScore);
+  _dontKnow() {
+    waterScore = 15.61;
+    console.log('heres the dont know total: ', waterScore)
+    this._sendWater();
+  }
+
+  _sendWater() {
+    totalScore += waterScore;
     // Save score to simple-store
     store.save('score', {
       total: totalScore,
-      transport: transportScore
+      water: waterScore
     });
     //Send score to database
-    fetch("http://192.168.0.79:3001/scores/transport", {
+    fetch("http://192.168.0.79:3001/scores/water", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -81,35 +93,34 @@ class Transport extends Component {
       },
       body: JSON.stringify({
         total: totalScore,
-        transport: transportScore
+        water: waterScore
       })
     })
     .done();
+
   }
 
 
-  /*************COMPONENT FUNCTIONS*********/
+  /********Component functions**********/
   componentWillMount() {
+    this._getScore();
     this._checkUser();
   }
 
   render() {
     return(
-      <View style={stylesTransport.container}>
-        <Text style={stylesTransport.text}>Do you own a car?</Text>
-          <TouchableHighlight style={stylesTransport.button} onPress={this._yes.bind(this)}>
-              <Text>Yes</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={stylesTransport.button} onPress={this._no.bind(this)}>
-              <Text>No</Text>
-          </TouchableHighlight>
-        <Text style={stylesTransport.text}>How many times have you flown in the past year?</Text>
+      <View style={stylesWater.container}>
+        <Text style={stylesWater.text}>How many gallons of water do you use a month? Check your water bill.</Text>
         <Form
           ref="form"
-          type={airForm}
+          type={waterForm}
           options={options}
         />
-        <TouchableHighlight style={stylesTransport.button} onPress={this._airCalc.bind(this)}>
+        <TouchableHighlight style={stylesWater.button} onPress={this._waterCalc.bind(this)}>
+          <Text>Submit</Text>
+        </TouchableHighlight>
+        <Text style={stylesWater.text}>Do you not know your water usage? That's fine. Click here and we'll give you an average.</Text>
+        <TouchableHighlight style={stylesWater.button} onPress={this._dontKnow.bind(this)}>
           <Text>Submit</Text>
         </TouchableHighlight>
       </View>
@@ -118,7 +129,7 @@ class Transport extends Component {
 
 }
 
-const stylesTransport = StyleSheet.create({
+const stylesWater = StyleSheet.create({
   container: {
       flex: 1,
       justifyContent: 'center',
@@ -142,4 +153,4 @@ const stylesTransport = StyleSheet.create({
 
 export default connect(state => ({
   user: state.user
-} ) )(Transport);
+} ) )(Water);

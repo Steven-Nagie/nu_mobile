@@ -14,7 +14,7 @@ function createToken(user) {
   return jwt.sign(_.omit(user, 'password'), config.secret, { expiresIn: 60*60*5 });
 }
 
-// This function, which I copied from Auth0, is useful for checking that we parse the information correctly. However, I'll do this on the front end (I won't let the user send bad or incomplete info). This should provide a better experience for the user, who will immediately know if they made a mistake, and will ensure that the back end isn't getting all screwy. 
+// This function, which I copied from Auth0, is useful for checking that we parse the information correctly. However, I'll do this on the front end (I won't let the user send bad or incomplete info). This should provide a better experience for the user, who will immediately know if they made a mistake, and will ensure that the back end isn't getting all screwy.
 function getUserScheme(req) {
 
   var username;
@@ -64,6 +64,7 @@ function getUserScheme(req) {
 // });
 
 app.post('/users', function(req, res, next) {
+  console.log('users is working');
 
   var firstname = req.body.firstname, lastname = req.body.lastname, state = req.body.state, email = req.body.email, password = req.body.password;
 
@@ -100,8 +101,4 @@ app.post('/sessions/create', function(req, res) {
   res.status(201).send({
     id_token: createToken(user)
   });
-});
-
-app.get('/users/hello', function(req, res, next) {
-  res.json("hello, you're working!");
 });
