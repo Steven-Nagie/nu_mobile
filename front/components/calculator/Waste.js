@@ -30,6 +30,7 @@ let options = {
 };
 
 let totalScore;
+let userId;
 let AUTH_TOKEN;
 let wasteScore = 58;
 
@@ -44,6 +45,7 @@ class Waste extends Component {
         console.log('There is no store data');
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
+        userId = user.id;
         console.log(user);
         console.log('this is the auth token ', AUTH_TOKEN)
       }
@@ -111,7 +113,8 @@ class Waste extends Component {
       },
       body: JSON.stringify({
         total: totalScore,
-        waste: wasteScore
+        waste: wasteScore,
+        id: userId
       })
     })
     .done();

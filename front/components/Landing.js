@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native';
+import _ from "lodash";
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
@@ -58,12 +59,13 @@ class Landing extends Component {
     }
   }
 
-  _saveUser(first, last, state, email) {
+  _saveUser(id, first, last, state, token) {
     store.save('user', {
+      id: id,
       firstname: first,
       lastname: last,
       state: state,
-      email: email
+      STORAGE_KEY: token
     });
   }
 
@@ -75,7 +77,6 @@ class Landing extends Component {
   _userSignup() {
   var value = this.refs.form.getValue();
   if (value) { // if validation fails, value will be null
-    this._saveUser(value.firstname, value.lastname, value.state, value.email);
     fetch("http://192.168.0.79:3001/users", {
       method: "POST",
       headers: {
@@ -93,14 +94,17 @@ class Landing extends Component {
     // For whatever reason changing from json actually hurts the thing.
     .then(response => response.json())
     .then((response) => {
-      store.update('user', {
-        STORAGE_KEY: response.id_token
-      });
-      Alert.alert(
-        "Signup Success!"
-      );
-      this.props.dispatch(createUser(value));
-      Actions.profile();
+      if (response.message) {
+        Alert.alert("That email is already taken, please try again.");
+      } else {
+        this._saveUser(response.user.id, response.user.firstname, response.user.lastname, response.user.state, response.id_token);
+        Alert.alert(
+          "Signup Success!"
+        );
+        // This is to push the user to the redux. However, I'm now sure that's necessary, since we're using the store package. Also, this value has the password, which is bad.
+        this.props.dispatch(createUser(_.pick(value, ['firstname', 'lastname', 'state', 'id'])));
+        Actions.transport();
+      }
     })
     .done();
   }

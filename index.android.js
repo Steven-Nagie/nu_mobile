@@ -37,7 +37,7 @@ export default class nu extends Component {
         <RouterWithRedux>
           <Scene key="root">
 
-                {/*<Scene
+                <Scene
                   key="landing"
                   component={Landing}
                   title="Nu.World"
@@ -51,6 +51,12 @@ export default class nu extends Component {
                   hideNavBar
                 />
                 <Scene
+                  key="transport"
+                  component={Transport}
+                  title="Transport"
+                  hideNavBar
+                />
+                {/*<Scene
                   key="calculator"
                   component={Calculator}
                   title="Calculator"
@@ -86,7 +92,8 @@ export default class nu extends Component {
                   title="Food Calculator"
                   hideNavBar
                 />*/}
-                <Scene
+                {/*I think the trick to navigating subcomponents is to use Switch*/}
+                {/*<Scene
                   key="calculator"
                   component={Calculator}
                   title="Calculator"
@@ -96,9 +103,16 @@ export default class nu extends Component {
                     key="calcLanding"
                     component={CalculatorLanding}
                     title="Welcome to the Carbon Calculator"
+                    initial
                     hideNavBar
                   />
-                </Scene>
+                  <Scene
+                    key="water"
+                    component={Water}
+                    title="Water Calculator"
+                    hideNavBar
+                  />
+                </Scene>*/}
 
 
           </Scene>

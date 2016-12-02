@@ -20,6 +20,8 @@ class Calculator extends Component {
   }
 
   componentWillMount() {
+    console.log("Children: ", this.props.children);
+    console.log("onNavigate: ", this.props.onNavigate);
   }
 
   render() {

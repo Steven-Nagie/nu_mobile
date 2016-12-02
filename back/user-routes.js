@@ -63,20 +63,32 @@ function getUserScheme(req) {
 //   });
 // });
 
+function createScore(id) {
+  db.create_score([id], function(err, score) {
+    if (err) {
+      res.status(500).json(err);
+    }
+  });
+}
+
 app.post('/users', function(req, res, next) {
   console.log('users is working');
 
   var firstname = req.body.firstname, lastname = req.body.lastname, state = req.body.state, email = req.body.email, password = req.body.password;
 
   db.create_user([firstname, lastname, state, email, password], function(err, user) {
+    console.log(user);
     if (err) {
       res.status(500).json(err);
     } else {
+      createScore(user[0].id);
       res.status(201).json({
-        id_token: createToken(user)
+        id_token: createToken(user),
+        user: user[0]
       });
     }
   });
+
 
 });
 

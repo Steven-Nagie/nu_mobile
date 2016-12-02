@@ -32,7 +32,8 @@ class Profile extends Component {
   async _userLogout() {
     try {
       await store.delete('user');
-      Alert.alert("Logout Success!")
+      Actions.landing();
+      Alert.alert("Logout Success!");
     } catch (error) {
       console.log('Storage error: ' + error.message);
     }

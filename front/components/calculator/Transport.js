@@ -28,7 +28,7 @@ let options = {
 
 var transportScore = 0;
 var totalScore = 0;
-
+let userId;
 let AUTH_TOKEN;
 
 class Transport extends Component {
@@ -42,6 +42,7 @@ class Transport extends Component {
         console.log('There is no store data');
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
+        userId = user.id;
         console.log(user);
         console.log('this is the auth token ', AUTH_TOKEN)
       }
@@ -81,8 +82,12 @@ class Transport extends Component {
       },
       body: JSON.stringify({
         total: totalScore,
-        transport: transportScore
+        transport: transportScore,
+        id: userId
       })
+    })
+    .then((response) => {
+      console.log(response);
     })
     .done();
   }

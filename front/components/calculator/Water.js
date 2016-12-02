@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
+import styles from "../styles.js";
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -27,6 +28,7 @@ let options = {
 
 let totalScore;
 let waterScore;
+let userId;
 let AUTH_TOKEN;
 
 class Water extends Component {
@@ -40,6 +42,7 @@ class Water extends Component {
         console.log('There is no store data');
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
+        userId = user.id;
         console.log(user);
         console.log('this is the auth token ', AUTH_TOKEN)
       }
@@ -93,7 +96,8 @@ class Water extends Component {
       },
       body: JSON.stringify({
         total: totalScore,
-        water: waterScore
+        water: waterScore,
+        id: userId
       })
     })
     .done();
@@ -109,47 +113,25 @@ class Water extends Component {
 
   render() {
     return(
-      <View style={stylesWater.container}>
-        <Text style={stylesWater.text}>How many gallons of water do you use a month? Check your water bill.</Text>
+      <View style={styles.container}>
+        <Text style={styles.text}>How many gallons of water do you use a month? Check your water bill.</Text>
         <Form
           ref="form"
           type={waterForm}
           options={options}
         />
-        <TouchableHighlight style={stylesWater.button} onPress={this._waterCalc.bind(this)}>
-          <Text>Submit</Text>
+        <TouchableHighlight style={styles.button} onPress={this._waterCalc.bind(this)}>
+          <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
-        <Text style={stylesWater.text}>Do you not know your water usage? That's fine. Click here and we'll give you an average.</Text>
-        <TouchableHighlight style={stylesWater.button} onPress={this._dontKnow.bind(this)}>
-          <Text>Submit</Text>
+        <Text style={styles.text}>Do you not know your water usage? That's fine. Click here and we'll give you an average.</Text>
+        <TouchableHighlight style={styles.button} onPress={this._dontKnow.bind(this)}>
+          <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </View>
     )
   }//Render stops here
 
 }
-
-const stylesWater = StyleSheet.create({
-  container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-  },
-  text: {
-    fontFamily: 'OpenSans-Regular',
-    fontSize: 24,
-    textAlign: 'center'
-  },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 90,
-    width: 90,
-    margin: 40,
-    padding: 20,
-    backgroundColor: 'blue'
-  }
-})
 
 export default connect(state => ({
   user: state.user

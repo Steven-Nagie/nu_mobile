@@ -19,6 +19,7 @@ t.form.Form.stylesheet.textbox.error.width = 100;
 const Form = t.form.Form;
 
 let totalScore;
+let userId;
 let AUTH_TOKEN;
 let energyScore = 1303;
 
@@ -33,6 +34,7 @@ class Energy extends Component {
         console.log('There is no store data');
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
+        userId = user.id;
         console.log(user);
         console.log('this is the auth token ', AUTH_TOKEN)
       }
@@ -73,7 +75,8 @@ class Energy extends Component {
       },
       body: JSON.stringify({
         total: totalScore,
-        energy: energyScore
+        energy: energyScore,
+        id: userId
       })
     })
     .done();

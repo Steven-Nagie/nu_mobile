@@ -16,6 +16,19 @@ CREATE TABLE users
   friends TEXT
 )
 
+CREATE TABLE scores
+(
+	id SERIAL PRIMARY KEY,
+  total INTEGER,
+	transport INTEGER,
+	energy INTEGER,
+	water INTEGER,
+	food INTEGER,
+	waste INTEGER,
+	userId INTEGER
+		REFERENCES users(id)
+)
+
 
 
 
@@ -23,4 +36,4 @@ CREATE TABLE users
 Make it so that creating a user simultaneously creates a scores row with their id. This will allow us to properly modify the row with their foreign key id when we get new score information from one of the calculator screens.
 
 Create the scores table and connect massive all the way
-	--Create a single put function that parses req.body looking for the relevant information. Alternatively, we could have a different endpoint for each section of the calculator. 
+	--Create a single put function that parses req.body looking for the relevant information. Alternatively, we could have a different endpoint for each section of the calculator.
