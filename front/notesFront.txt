@@ -1,7 +1,10 @@
 Samsung s5 ratio is 360X640
 **Probably better to do it in flex, isn't it?
 
-Font sizes need to be about three times as large as they are on the mobile wireframes in order to look right due to the difference in logical and real pixel ratios. 
+*****FRIDAY EVENING******
+Working on Profile styling. Currently for whatever reason, can't get the links on the bottom of the banner to show up. the entire view just disappears whenever I try to put it anywhere on the banner. Maybe a z-index issue? 
+
+Font sizes need to be about three times as large as they are on the mobile wireframes in order to look right due to the difference in logical and real pixel ratios.
 
 This is how to send the token in order to get authorization.
 

@@ -13,7 +13,7 @@ import store from "./front/store.js"
 /************IMPORT COMPONENTS***********/
 import Header from './front/components/Header';
 import Landing from './front/components/Landing.js';
-import Profile from './front/components/Profile.js';
+import Profile from './front/components/profile/Profile.js';
 import Calculator from './front/components/calculator/Calculator.js';
 import CalculatorLanding from "./front/components/calculator/CalculatorLanding.js";
 import Transport from "./front/components/calculator/Transport";
@@ -21,7 +21,6 @@ import Water from "./front/components/calculator/Water";
 import Waste from "./front/components/calculator/Waste";
 import Food from "./front/components/calculator/Food";
 import Energy from "./front/components/calculator/Energy";
-
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -48,8 +47,8 @@ export default class nu extends Component {
                   key="profile"
                   component={Profile}
                   title="Your profile"
-                  initial
                   hideNavBar
+                  intial
                 />
                 <Scene
                   key="transport"

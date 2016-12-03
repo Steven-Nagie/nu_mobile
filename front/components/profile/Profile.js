@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import {createUser} from '../ducks/userDuck.js';
+import {createUser} from '../../ducks/userDuck.js';
 import store from 'react-native-simple-store';
 
-import Header from './Header';
+import Header from '../Header';
 
 let width;
 let height;
@@ -63,9 +63,9 @@ class Profile extends Component {
           </View>
           <View style={styles.container}>
 
-            <View style={[styles.banner,  {width: width}]}>
+            <Image source={require('../../images/steven.jpg')} style={[styles.banner,  {width: width}]}>
               <View style={styles.imageContainer}>
-                <Image style={styles.profilePic} source={require('../images/steven.jpg')} />
+                <Image style={styles.profilePic} source={require('../../images/steven.jpg')} />
               </View>
 
               <View style={[styles.bannerSmall, {width: width}]}>
@@ -74,7 +74,12 @@ class Profile extends Component {
                 <Text style={styles.location}>{this.props.user.state}</Text>
               </View>
 
-            </View>
+              <View style={[styles.bannerLinks, {width: width}]}>
+              <Text style={{marginHorizontal: 10}}>Feed</Text>
+              <Text style={{marginHorizontal: 10}}>Followers</Text>
+              <Text style={{marginHorizontal: 10}}>Following</Text>
+              </View>
+            </Image>
 
             <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
             <Text style={styles.buttonText}>Log Out</Text>
@@ -110,23 +115,30 @@ const styles = StyleSheet.create({
     height: 210,
     position: 'absolute',
     top: 0,
-    backgroundColor: 'red',
+    backgroundColor: 'rgba(0,0,0,0)',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
   bannerSmall: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'flex-start',
+    paddingLeft: 30
   },
-  imageContainer: {
+  bannerLinks: {
+    position: 'absolute',
+    height: 15,
+    bottom: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red'
   },
   profilePic: {
     height: 95,
     width: 90,
     borderColor: '#979797',
-    // borderStyle: 'solid',
     borderWidth: 0.5625,
     borderRadius: 50
   },
