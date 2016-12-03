@@ -2,16 +2,19 @@ Samsung s5 ratio is 360X640
 **Probably better to do it in flex, isn't it?
 
 *****FRIDAY EVENING******
-Working on Profile styling. Currently for whatever reason, can't get the links on the bottom of the banner to show up. the entire view just disappears whenever I try to put it anywhere on the banner. Maybe a z-index issue? 
+Working on Profile styling. Currently for whatever reason, can't get the links on the bottom of the banner to show up. the entire view just disappears whenever I try to put it anywhere on the banner. Maybe a z-index issue?
 
 Font sizes need to be about three times as large as they are on the mobile wireframes in order to look right due to the difference in logical and real pixel ratios.
 
 This is how to send the token in order to get authorization.
 
+ip at DevMountain: 192.168.0.79
+ip at Home: 10.0.0.21
+
 async _getProtectedQuote() {
 var DEMO_TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
 console.log(DEMO_TOKEN);
-fetch("http://192.168.0.79:3001/api/protected/random-quote", {
+fetch("http://10.0.0.21:3001/api/protected/random-quote", {
   method: "GET",
   headers: {
     'Authorization': 'Bearer ' + DEMO_TOKEN
@@ -29,6 +32,12 @@ fetch("http://192.168.0.79:3001/api/protected/random-quote", {
 }
 
 When user puts in state, you will have to make sure to push it to all uppercase. Do we want to capitalize the first letter of everyone's first and last name or simply leave it like they give it to us?
+
+<View style={[styles.bannerLinks, {width: width}]}>
+  <Text style={{marginHorizontal: 10}}>Feed</Text>
+  <Text style={{marginHorizontal: 10}}>Followers</Text>
+  <Text style={{marginHorizontal: 10}}>Following</Text>
+</View>
 
 Hacky logout:
 tell store that user wants Out

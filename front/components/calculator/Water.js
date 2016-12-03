@@ -87,7 +87,7 @@ class Water extends Component {
       water: waterScore
     });
     //Send score to database
-    fetch("http://192.168.0.79:3001/scores/water", {
+    fetch("http://10.0.0.21:3001/scores/water", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,

@@ -79,7 +79,7 @@ class Landing extends Component {
   _userSignup() {
   var value = this.refs.form.getValue();
   if (value) { // if validation fails, value will be null
-    fetch("http://192.168.0.79:3001/users", {
+    fetch("http://10.0.0.21:3001/users", {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -117,7 +117,7 @@ _userLogin() {
   Actions.profile();
   // var value = this.refs.form.getValue();
   // if (value) { // if validation fails, value will be null
-  //   fetch("http://192.168.0.79:3001/sessions/create", {
+  //   fetch("http://10.0.0.21:3001/sessions/create", {
   //     method: "POST",
   //     headers: {
   //       'Accept': 'application/json',

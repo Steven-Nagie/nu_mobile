@@ -7,7 +7,9 @@ import {
   TouchableHighlight,
   Alert,
   Image,
-  Dimensions
+  Dimensions,
+  TextInput,
+  ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -15,6 +17,8 @@ import {createUser} from '../../ducks/userDuck.js';
 import store from 'react-native-simple-store';
 
 import Header from '../Header';
+import Feed from './Feed';
+import Followers from './Followers';
 
 let width;
 let height;
@@ -61,11 +65,17 @@ class Profile extends Component {
           <View style={styles.header}>
             <Header />
           </View>
-          <View style={styles.container}>
+          <ScrollView contentContainerStyle={styles.contentContainer}>
 
             <Image source={require('../../images/steven.jpg')} style={[styles.banner,  {width: width}]}>
               <View style={styles.imageContainer}>
                 <Image style={styles.profilePic} source={require('../../images/steven.jpg')} />
+              </View>
+
+              <View style={[styles.bannerLinks, {width: width}]}>
+                <Text style={styles.linkText}>Feed</Text>
+                <Text style={styles.linkText}>Followers</Text>
+                <Text style={styles.linkText}>Following</Text>
               </View>
 
               <View style={[styles.bannerSmall, {width: width}]}>
@@ -74,12 +84,13 @@ class Profile extends Component {
                 <Text style={styles.location}>{this.props.user.state}</Text>
               </View>
 
-              <View style={[styles.bannerLinks, {width: width}]}>
-              <Text style={{marginHorizontal: 10}}>Feed</Text>
-              <Text style={{marginHorizontal: 10}}>Followers</Text>
-              <Text style={{marginHorizontal: 10}}>Following</Text>
-              </View>
             </Image>
+
+            {/*This is where the various assorted scenes will go with the DefaultRenderer*/}
+            <View
+              style={[styles.subScene, {width: width}]}>
+              <Followers />
+            </View>
 
             <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
             <Text style={styles.buttonText}>Log Out</Text>
@@ -89,7 +100,7 @@ class Profile extends Component {
               onPress={Actions.calculator}>
               <Text style={styles.buttonText}>Go to calculator</Text>
             </TouchableHighlight>
-          </View>
+          </ScrollView>
         </View>
     )
   }
@@ -98,14 +109,14 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: 'green'
   },
   header: {
     top: 0,
   },
-  container: {
+  contentContainer: {
     flex: 1,
-    justifyContent: 'center',
+    height: 1200,
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#f7f7f7',
   },
@@ -113,15 +124,14 @@ const styles = StyleSheet.create({
   banner: {
     padding: 20,
     height: 210,
-    position: 'absolute',
-    top: 0,
+    // position: 'absolute',
+    // top: -25,
     backgroundColor: 'rgba(0,0,0,0)',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   bannerSmall: {
-    // backgroundColor: 'green',
     flex: 1,
     alignItems: 'flex-start',
     paddingLeft: 30
@@ -130,10 +140,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 15,
     bottom: 0,
+    left: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red'
+  },
+  linkText: {
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: 14,
+    marginHorizontal: 10
   },
   profilePic: {
     height: 95,
@@ -158,6 +174,10 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'OpenSans-Semibold',
     fontSize: 27
+  },
+  // SubScene styles
+  subScene: {
+    flex: 1,
   },
   buttonText: {
     fontSize: 18,

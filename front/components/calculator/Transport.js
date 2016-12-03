@@ -73,7 +73,7 @@ class Transport extends Component {
       transport: transportScore
     });
     //Send score to database
-    fetch("http://192.168.0.79:3001/scores/transport", {
+    fetch("http://10.0.0.21:3001/scores/transport", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
