@@ -22,7 +22,7 @@ class Loading extends Component {
     try {
       const user = await store.get('user');
       if (!user) {
-        Actions.landing();
+        Actions.signUp();
       } else {
         console.log(user);
         AUTH_TOKEN = user.STORAGE_KEY;
@@ -36,7 +36,7 @@ class Loading extends Component {
         }).then(function (response) {
             console.log(response);
             if (response.status === 401) {
-              Actions.landing();
+              Actions.signUp();
             } else if (response.status === 200) {
               // Have to figure out how to get proper scope for this:
               // this.props.dispatch(createUser(user));
@@ -50,7 +50,7 @@ class Loading extends Component {
   }
 
   componentWillMount() {
-    //Here we'll check async storage for token and user information, check with an api call if the token is good, then automatically pass user onto profile page or whatever. If there is no user data then we push them to the landing page.
+    //Here we'll check async storage for token and user information, check with an api call if the token is good, then automatically pass user onto profile page or whatever. If there is no user data then we push them to the signUp page.
     this._authUser();
   }
 

@@ -13,7 +13,7 @@ import store from "./front/store.js"
 /************IMPORT COMPONENTS***********/
 import Header from './front/components/Header';
 import Loading from './front/components/Loading';
-import Landing from './front/components/Landing.js';
+import SignUp from './front/components/SignUp.js';
 import Profile from './front/components/profile/Profile.js';
 import Calculator from './front/components/calculator/Calculator.js';
 import CalculatorLanding from "./front/components/calculator/CalculatorLanding.js";
@@ -46,8 +46,8 @@ export default class nu extends Component {
                   initial
                 />
                 <Scene
-                  key="landing"
-                  component={Landing}
+                  key="signUp"
+                  component={SignUp}
                   title="Nu.World"
                   hideNavBar
                 />

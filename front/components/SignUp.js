@@ -43,7 +43,7 @@ let options = {
 // Auth stuff
 let STORAGE_KEY = "id_token";
 
-class Landing extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
   }
@@ -128,8 +128,8 @@ _userLogin() {
 
   render() {
     return(
-    <View style={stylesLanding.container}>
-      <Text style={stylesLanding.header}
+    <View style={stylesSignUp.container}>
+      <Text style={stylesSignUp.header}
       onPress={() =>Actions.profile()}>Welcome to Nu.world</Text>
       <Text>Please sign in here</Text>
       <Form
@@ -137,18 +137,18 @@ _userLogin() {
         type={SignIn}
         options={options}
       />
-      <TouchableHighlight style={stylesLanding.button} onPress={this._userSignup.bind(this)}>
-      <Text style={stylesLanding.buttonText}>Save New User</Text>
+      <TouchableHighlight style={stylesSignUp.button} onPress={this._userSignup.bind(this)}>
+      <Text style={stylesSignUp.buttonText}>Save New User</Text>
       </TouchableHighlight>
-      <TouchableHighlight style={stylesLanding.button} onPress={this._userLogin.bind(this)}>
-      <Text style={stylesLanding.buttonText}>Log In</Text>
+      <TouchableHighlight style={stylesSignUp.button} onPress={this._userLogin.bind(this)}>
+      <Text style={stylesSignUp.buttonText}>Log In</Text>
       </TouchableHighlight>
     </View>
     )
   }
 }
 
-const stylesLanding = StyleSheet.create({
+const stylesSignUp = StyleSheet.create({
   header: {
     color: 'red',
     fontSize: 20
@@ -179,4 +179,4 @@ const stylesLanding = StyleSheet.create({
 
 export default connect( state => ( {
   user: state.user
-} ) )(Landing);
+} ) )(SignUp);

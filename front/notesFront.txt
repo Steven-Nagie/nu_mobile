@@ -41,13 +41,13 @@ When user puts in state, you will have to make sure to push it to all uppercase.
 
 Hacky logout:
 tell store that user wants Out
-push to landing page
-on landing page componentWillMount, have landing page check store for status flag
+push to signUp page
+on signUp page componentWillMount, have signUp page check store for status flag
 then delete token
 
 
   <Scene
-    key="calculatorLanding"
-    component={CalculatorLanding}
-    title="Calculator Landing"
+    key="calculatorSignUp"
+    component={CalculatorSignUp}
+    title="Calculator SignUp"
   />

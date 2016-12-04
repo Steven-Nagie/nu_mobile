@@ -30,7 +30,7 @@ class Food extends Component {
       const user = await store.get('user');
       if(!user) {
         //In actual app you would want to shoot user back to sign in page.
-        // Actions.landing();
+        // Actions.signUp();
         console.log('There is no store data');
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
