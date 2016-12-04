@@ -20,6 +20,7 @@ var app = express();
 /********IMPORT CONTROLLERS*********/
 var userRoutes = require('./back/user-routes');
 var scoreRoutes = require('./back/score-routes');
+var authRoutes = require('./back/auth-user');
 
 dotenv.load();
 
@@ -43,6 +44,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(userRoutes);
 app.use(scoreRoutes);
+app.use(authRoutes);
 
 var port = process.env.PORT || 3001;
 

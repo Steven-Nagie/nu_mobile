@@ -42,13 +42,13 @@ export default class nu extends Component {
                   component={Landing}
                   title="Nu.World"
                   hideNavBar
+                  intial
                 />
                 <Scene
                   key="profile"
                   component={Profile}
                   title="Your profile"
                   hideNavBar
-                  intial
                 />
                 <Scene
                   key="transport"

@@ -44,8 +44,11 @@ let options = {
 let STORAGE_KEY = "id_token";
 
 class Landing extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  async _checkUser() {
+  async _authUser() {
     console.log('calling checkuser with store');
     try {
       const user = await store.get('user');
@@ -53,8 +56,24 @@ class Landing extends Component {
         console.log('There is no store data');
       } else {
         console.log(user);
-        this.props.dispatch(createUser(user));
-        Actions.profile();
+        AUTH_TOKEN = user.STORAGE_KEY;
+        fetch("http://10.0.0.21:3001/auth", {
+          method: "GET",
+          headers: {
+            'Authorization': 'Bearer ' + AUTH_TOKEN,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
+            console.log(response);
+            if (response.status === 401) {
+              console.log('401');
+            } else if (response.status === 200) {
+              // Have to figure out how to get proper scope for this:
+              // this.props.dispatch(createUser(user));
+              Actions.profile();
+            }
+          }).done();
       }
     } catch(err) {
       console.log(err);
@@ -72,8 +91,8 @@ class Landing extends Component {
   }
 
   componentWillMount() {
-    //Here we'll check async storage for token and user information, then automatically pass user onto profile page or whatever.
-    this._checkUser();
+    //Here we'll check async storage for token and user information, check with an api call if the token is good, then automatically pass user onto profile page or whatever.
+    this._authUser();
   }
 
   _userSignup() {
