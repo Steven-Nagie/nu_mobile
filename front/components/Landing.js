@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import {createUser} from '../ducks/userDuck.js';
-import store from 'react-native-simple-store'
+import store from 'react-native-simple-store';
 
 
 // Modify form width
@@ -48,38 +48,6 @@ class Landing extends Component {
     super(props);
   }
 
-  async _authUser() {
-    console.log('calling checkuser with store');
-    try {
-      const user = await store.get('user');
-      if (!user) {
-        console.log('There is no store data');
-      } else {
-        console.log(user);
-        AUTH_TOKEN = user.STORAGE_KEY;
-        fetch("http://10.0.0.21:3001/auth", {
-          method: "GET",
-          headers: {
-            'Authorization': 'Bearer ' + AUTH_TOKEN,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }).then(function (response) {
-            console.log(response);
-            if (response.status === 401) {
-              console.log('401');
-            } else if (response.status === 200) {
-              // Have to figure out how to get proper scope for this:
-              // this.props.dispatch(createUser(user));
-              Actions.profile();
-            }
-          }).done();
-      }
-    } catch(err) {
-      console.log(err);
-    }
-  }
-
   _saveUser(id, first, last, state, token) {
     store.save('user', {
       id: id,
@@ -88,11 +56,6 @@ class Landing extends Component {
       state: state,
       STORAGE_KEY: token
     });
-  }
-
-  componentWillMount() {
-    //Here we'll check async storage for token and user information, check with an api call if the token is good, then automatically pass user onto profile page or whatever.
-    this._authUser();
   }
 
   _userSignup() {
