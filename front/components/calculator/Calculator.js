@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
+import LinearGradient from 'react-native-linear-gradient';
 
 import styles from '../styles.js';
 
@@ -88,7 +89,14 @@ class Calculator extends Component {
 
             <View style={[stylesCalculator.progressView, {width: width}]}>
               <Text style={stylesCalculator.progress}>Progress</Text>
-              <View style={[stylesCalculator.progressBar, {width: (width*.6)}]} />
+              <LinearGradient
+                start={[0.0, 0.5]}
+                end={[1.0, 1.0]}
+                colors={['rgba(249, 129, 97, 1)', 'rgba(252, 215, 118, 1)', 'rgba(181, 222, 109, 1)', 'rgba(99, 202, 192, 1)']}
+                style={[stylesCalculator.progressBarColor, {width: (width*.6)}]}>
+                <View style={[stylesCalculator.progressBar, {width: (width*.4)}]} />
+              </LinearGradient>
+
               <Text style={stylesCalculator.percent}>{percentComplete}%</Text>
             </View>
 
@@ -157,10 +165,14 @@ const stylesCalculator = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'OpenSans-Regular'
   },
+  progressBarColor: {
+    height: 5,
+    marginTop: 5
+  },
   progressBar: {
     height: 5,
     backgroundColor: '#e0e0e0',
-    marginTop: 5
+    alignSelf: 'flex-end'
   },
   smallContainer: {
     flex: .8,
@@ -174,6 +186,7 @@ const stylesCalculator = StyleSheet.create({
 
 // Code for bar in color.
 // linear-gradient(180deg, rgba(99, 202, 192, 1) 0%, rgba(181, 222, 109, 1) 37%, rgba(252, 215, 118, 1) 70%, rgba(249, 129, 97, 1) 100%)
+//For future reference, I like the effect that locations={[0, 0.2, 0.5, 0.75]} has on the gradient. It spreads the blue over a greater area.
 
 export default connect(state => ({
   user: state.user,

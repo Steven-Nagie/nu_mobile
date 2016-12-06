@@ -20,6 +20,7 @@
 		"morgan": "^1.7.0",
 		"react": "~15.4.0-rc.4",
 		"react-native": "0.38.0",
+		"react-native-linear-gradient": "^1.5.15",
 		"react-native-router-flux": "^3.37.0",
 		"react-native-simple-store": "^1.1.0",
 		"react-redux": "^4.4.6",
