@@ -24,6 +24,7 @@ import Water from "./front/components/calculator/Water";
 import Waste from "./front/components/calculator/Waste";
 import Food from "./front/components/calculator/Food";
 import Energy from "./front/components/calculator/Energy";
+import ChallengeIndex from "./front/components/challenges/ChallengeIndex";
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -74,6 +75,12 @@ export default class nu extends Component {
                   key="profile"
                   component={Profile}
                   title="Profile"
+                  hideNavBar
+                />
+                <Scene
+                  key="challenges"
+                  component={ChallengeIndex}
+                  title="Challenges"
                   hideNavBar
                   initial
                 />

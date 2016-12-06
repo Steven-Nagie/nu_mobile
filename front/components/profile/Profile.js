@@ -9,7 +9,7 @@ import {
   Image,
   Dimensions,
   TextInput,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -94,17 +94,18 @@ class Profile extends Component {
               <Followers />
             </View>
 
-            <View style={styles.buttonContainer}>
-              <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
-              <Text style={styles.buttonText}>Log Out</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={Actions.calculator}>
-                <Text style={styles.buttonText}>Go to calculator</Text>
-              </TouchableHighlight>
-            </View>
           </ScrollView>
+
+          <View style={[styles.buttonContainer, {width: width}]}>
+            <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
+            <Text style={styles.buttonText}>Log Out</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+            style={styles.button}
+            onPress={Actions.calculator}>
+            <Text style={styles.buttonText}>Go to calculator</Text>
+            </TouchableHighlight>
+          </View>
 
           <View style={styles.footer}>
             <Footer />
@@ -190,7 +191,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 30
+    bottom: 65,
+    justifyContent: 'center'
   },
   buttonText: {
     fontSize: 18,
