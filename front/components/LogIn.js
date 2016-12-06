@@ -5,7 +5,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -82,6 +83,9 @@ class LogIn extends Component {
   render() {
     return(
       <View style={styles.container}>
+
+      <Image source={require('../images/nu-colorr.png')} style={{marginBottom: 10}} />
+
         <Form
           ref="form"
           type={Log}

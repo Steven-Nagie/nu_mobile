@@ -14,6 +14,8 @@ import t from "tcomb-form-native";
 import {createUser} from '../ducks/userDuck.js';
 import store from 'react-native-simple-store';
 
+import styles from "./styles";
+
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -101,16 +103,16 @@ class SignUp extends Component {
   render() {
     return(
     <View style={stylesSignUp.container}>
-      <Text style={stylesSignUp.header}
+      <Text style={styles.h1}
       onPress={() =>Actions.profile()}>Welcome to Nu.world</Text>
-      <Text>Please sign in here</Text>
+      <Text style={styles.subHeader}>Create an account here</Text>
       <Form
         ref="form"
         type={SignIn}
         options={options}
       />
       <TouchableHighlight style={stylesSignUp.button} onPress={this._userSignup.bind(this)}>
-      <Text style={stylesSignUp.buttonText}>Save New User</Text>
+        <Text style={stylesSignUp.buttonText}>Save New User</Text>
       </TouchableHighlight>
     </View>
     )
@@ -131,18 +133,17 @@ const stylesSignUp = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    textAlign: 'center'
   },
   button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  }
+    backgroundColor: '#8bd1ca',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: 100
+  },
 })
 
 

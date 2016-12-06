@@ -80,7 +80,9 @@ class Profile extends Component {
 
               <View style={[styles.bannerSmall, {width: width}]}>
                 <Text style={styles.name}>{this.props.user.firstname}</Text>
-                <Text style={styles.title}>Title</Text>
+                <TouchableHighlight>
+                  <Text style={styles.title}>Title</Text>
+                </TouchableHighlight>
                 <Text style={styles.location}>{this.props.user.state}</Text>
               </View>
 
@@ -92,14 +94,16 @@ class Profile extends Component {
               <Followers />
             </View>
 
-            <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
-            <Text style={styles.buttonText}>Log Out</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button}
-              onPress={Actions.calculator}>
-              <Text style={styles.buttonText}>Go to calculator</Text>
-            </TouchableHighlight>
+            <View style={styles.buttonContainer}>
+              <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
+              <Text style={styles.buttonText}>Log Out</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button}
+                onPress={Actions.calculator}>
+                <Text style={styles.buttonText}>Go to calculator</Text>
+              </TouchableHighlight>
+            </View>
           </ScrollView>
 
           <View style={styles.footer}>
@@ -183,20 +187,25 @@ const styles = StyleSheet.create({
   subScene: {
     flex: 1,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 30
+  },
   buttonText: {
     fontSize: 18,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    textAlign: 'center',
   },
   button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
+    backgroundColor: '#8bd1ca',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: 100,
+    marginRight: 10,
   },
   footer: {
     bottom: 0

@@ -5,7 +5,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -15,10 +16,11 @@ export default class LogOrSign extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <TouchableHighlight style={styles.button} onPress={Actions.logIn}>
+        <TouchableHighlight style={[styles.button, {margin: 20}]} onPress={Actions.logIn}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={Actions.signUp}>
+        <Image source={require('../images/nu-colorr.png')} />
+        <TouchableHighlight style={[styles.button, {margin: 20}]} onPress={Actions.signUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableHighlight>
       </View>

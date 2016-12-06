@@ -35,7 +35,6 @@ class CalcStats extends Component {
     this.state = {
       totalScore: 0,
       earths: 0,
-      percent: 0
     }
   }
 
@@ -66,16 +65,15 @@ class CalcStats extends Component {
 
   render() {
     let {height, width} = Dimensions.get('window');
+    let emissionsDifference = this.state.totalScore - 1980.45;
+    let percentChange = Math.round((emissionsDifference/this.state.totalScore) * 100);
     return(
       <View style={stylesStats.container}>
         <View style={stylesStats.header}>
           <Text style={styles.headerText}>Final Results</Text>
         </View>
         <View style={stylesStats.main}>
-          <View style={stylesStats.mainLeft}>
-          </View>
-          <View style={stylesStats.mainRight}>
-            <View>
+            <View style={stylesStats.miniView}>
               <Text style={stylesStats.smallHeaderText}>
                 Overall Emissions
               </Text>
@@ -83,22 +81,21 @@ class CalcStats extends Component {
                 {this.state.totalScore} lbs of CO2 equivalent
               </Text>
             </View>
-            <View>
+            <View style={stylesStats.miniView}>
               <Text style={stylesStats.smallHeaderText}>
                 Resources
               </Text>
               <Text style={stylesStats.text}>
-                It takes {this.state.earths} Earths to support your current lifestyle.
+                You are <Text style={stylesStats.infoText}>{this.state.totalScore - 1980.45} lbs</Text> above the 2025 US national goal.
               </Text>
             </View>
-            <View>
+            <View style={stylesStats.miniView}>
               <Text style={stylesStats.smallHeaderText}>
                 Actions
               </Text>
               <Text style={stylesStats.text}>
-                You could reduce your emissions by <Text style={stylesStats.infoText}>{this.state.percent}%</Text>
+                To adhere to US national goals, you can reduce your emissions by <Text style={stylesStats.infoText}>{percentChange}%</Text>
               </Text>
-            </View>
           </View>
         </View>
         <View style={stylesStats.buttonView}>
@@ -129,7 +126,10 @@ const stylesStats = StyleSheet.create({
   main: {
     width: 300,
     height: 220,
-    flexDirection: 'row'
+    // flexDirection: 'row'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 20
   },
   mainLeft: {
     height: 220,
@@ -150,13 +150,19 @@ const stylesStats = StyleSheet.create({
   infoText: {
     fontSize: 14,
     fontFamily: 'OpenSans-Bold',
-    color: '#333333'
+    color: '#333333',
+    textAlign: 'center'
   },
   text: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
-    color: '#a6b1b0'
+    color: '#a6b1b0',
+    textAlign: 'center'
   },
+  miniView: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
 
 export default connect(state => ({

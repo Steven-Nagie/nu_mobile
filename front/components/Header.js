@@ -15,7 +15,11 @@ export default class Header extends Component {
     return(
       <View style={styles.main}>
         <Image source={require('../images/nu-colorr.png')} />
-        <Image source={require('../images/page-1.png')} />
+        <View style={styles.right}>
+          <Image source={require('../images/notification-bell.png')} />
+          <Image source={require('../images/steven.jpg')} style={styles.thumbnail} />
+          <Image source={require('../images/triangle-header.png')} style={styles.triangle}/>
+        </View>
       </View>
     )
   }
@@ -29,5 +33,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     alignItems: 'center'
+  },
+  right: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  thumbnail: {
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    marginLeft: 10
+  },
+  triangle: {
+    height: 8,
+    width: 8,
+    marginTop: 3,
+    marginLeft: 3
   }
 })

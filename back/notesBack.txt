@@ -13,7 +13,8 @@ CREATE TABLE users
   state VARCHAR(2),
   email TEXT UNIQUE,
   password TEXT,
-  friends TEXT
+  title TEXT, 
+	photo TEXT
 )
 
 CREATE TABLE scores

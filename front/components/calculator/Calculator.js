@@ -34,15 +34,16 @@ import CalcStats from "./CalcStats.js";
 let width;
 let height;
 let percentComplete = 0;
+let percentProgress = 1;
 let stepComponent;
 let componentArray = [
-  <CalculatorLanding />,
-  <Transport />,
-  <Energy />,
-  <Water />,
-  <Waste />,
-  <Food />,
-  <CalcStats />
+  <CalculatorLanding key="calculatorLanding"/>,
+  <Transport key="transport"/>,
+  <Energy key="energy"/>,
+  <Water key="water"/>,
+  <Waste key="waste"/>,
+  <Food key="food"/>,
+  <CalcStats key="calcStats"/>
 ];
 
 
@@ -59,14 +60,19 @@ class Calculator extends Component {
   _getPercent() {
     if (this.props.calcComponent === 2) {
       percentComplete = 20;
+      percentProgress = .8;
     } else if (this.props.calcComponent === 3) {
       percentComplete = 40;
+      percentProgress = .6
     } else if (this.props.calcComponent === 4) {
       percentComplete = 60;
+      percentProgress = .4;
     } else if (this.props.calcComponent === 5) {
       percentComplete = 80;
+      percentProgress = .2
     } else if (this.props.calcComponent > 5) {
       percentComplete = 100;
+      percentProgress = 0;
     }
     console.log(percentComplete);
   }
@@ -94,7 +100,7 @@ class Calculator extends Component {
                 end={[1.0, 1.0]}
                 colors={['rgba(249, 129, 97, 1)', 'rgba(252, 215, 118, 1)', 'rgba(181, 222, 109, 1)', 'rgba(99, 202, 192, 1)']}
                 style={[stylesCalculator.progressBarColor, {width: (width*.6)}]}>
-                <View style={[stylesCalculator.progressBar, {width: (width*.4)}]} />
+                <View style={[stylesCalculator.progressBar, {width: ((width*.6) * percentProgress)}]} />
               </LinearGradient>
 
               <Text style={stylesCalculator.percent}>{percentComplete}%</Text>

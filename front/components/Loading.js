@@ -22,7 +22,7 @@ class Loading extends Component {
     try {
       const user = await store.get('user');
       if (!user) {
-        Actions.signUp();
+        Actions.logOrSign();
       } else {
         console.log(user);
         AUTH_TOKEN = user.STORAGE_KEY;

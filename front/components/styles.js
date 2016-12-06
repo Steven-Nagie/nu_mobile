@@ -15,6 +15,20 @@ module.exports = {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  h1: {
+    fontFamily: 'OpenSans-Light',
+    fontSize: 30,
+    textAlign: 'center',
+    color: '#333333',
+    // marginBottom: 10
+  },
+  subHeader: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 15,
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 10
+  },
   text: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,

@@ -45,7 +45,6 @@ export default class nu extends Component {
                   component={Loading}
                   title="Nu.World"
                   hideNavBar
-
                 />
                 <Scene
                   key="logOrSign"
@@ -70,13 +69,13 @@ export default class nu extends Component {
                   component={Calculator}
                   title="Calculator"
                   hideNavBar
-                  initial
                 />
                 <Scene
                   key="profile"
                   component={Profile}
                   title="Profile"
                   hideNavBar
+                  initial
                 />
 
 
