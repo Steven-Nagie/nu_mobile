@@ -119,13 +119,13 @@ export default class nu extends Component {
                   component={Calculator}
                   title="Calculator"
                   hideNavBar
+                  initial
                 />
                 <Scene
                   key="profile"
                   component={Profile}
                   title="Profile"
                   hideNavBar
-                  initial
                 />
 
 

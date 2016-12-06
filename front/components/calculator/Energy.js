@@ -134,5 +134,6 @@ const stylesEnergy = StyleSheet.create({
 })
 
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  calcComponent: state.calcComponent
 } ) )(Energy);

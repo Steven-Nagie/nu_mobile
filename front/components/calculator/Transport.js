@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
-import bootstrap from './tcomb-form-native/lib/stylesheets/bootstrap';
+// import bootstrap from './tcomb-form-native/lib/stylesheets/bootstrap';
 import store from 'react-native-simple-store';
 import { changeComp } from '../../ducks/calcDuck';
 
@@ -29,7 +29,6 @@ const airForm = t.struct({
   "totalFlights": t.Number
 });
 let options = {
-  stylesheet: bootstrap
 }
 
 var transportScore = 0;
@@ -139,5 +138,6 @@ class Transport extends Component {
 
 
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  calcComponent: state.calcComponent
 } ) )(Transport);

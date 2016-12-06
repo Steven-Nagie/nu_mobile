@@ -13,12 +13,14 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
-import { DefaultRenderer } from 'react-native-router-flux';
 
 import styles from '../styles.js';
 
 import Header from '../Header';
 import Footer from '../Footer';
+
+import Icons from './calcIcons';
+console.log(Icons);
 
 import CalculatorLanding from './CalculatorLanding';
 import Transport from './Transport';
@@ -26,6 +28,7 @@ import Energy from './Energy';
 import Water from './Water';
 import Waste from './Waste';
 import Food from './Food';
+import CalcStats from "./CalcStats.js";
 
 let width;
 let height;
@@ -36,8 +39,11 @@ let componentArray = [
   <Energy />,
   <Water />,
   <Waste />,
-  <Food />
+  <Food />,
+  <CalcStats />
 ];
+let calcIcons;
+
 
 class Calculator extends Component {
   constructor(props) {
@@ -49,25 +55,62 @@ class Calculator extends Component {
     }
   }
 
-  _getComponent() {
-    componentArray = [
-      <CalculatorLanding />,
-      <Transport />,
-      <Energy />,
-      <Water />,
-      <Waste />,
-      <Food />
-    ];
-  }
-
-  componentWillMount() {
-    // this._getComponent();
-    console.log(this.state);
-  }
-
   render() {
     let stepComponent = componentArray[this.props.calcComponent];
     let {height, width} = Dimensions.get("window");
+    // I really don't want this in here, but moving it to a separate folder runs into a bunch of weird "undefined" issues that would just suck a bunch of time.
+    let calcIcons = [
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+      ],
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+      ],
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+      ],
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+      ],
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+      ],
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon-color.png')} />,
+      ],
+      [
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
+        <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon-color.png')} />,
+      ],
+    ]
+    let calcIconsCurrent = calcIcons[this.props.calcComponent];
     return(
       <View style={styles.main}>
         <View style={styles.header}>
@@ -76,11 +119,7 @@ class Calculator extends Component {
         <View style={stylesCalculator.container}>
           <View style={[stylesCalculator.top, {width: width}]}>
             <View style={[stylesCalculator.topIcons, {width: width}]}>
-              <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon.png')} />
-              <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />
-              <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />
-              <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />
-              <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />
+              {calcIconsCurrent}
             </View>
 
             <View style={[stylesCalculator.progressView, {width: width}]}>

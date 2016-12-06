@@ -12,6 +12,11 @@ module.exports = {
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  headerText: {
+    color: '#6f8381',
+    fontSize: 24,
+    fontFamily: "OpenSans-Light"
+  },
   bigText: {
     fontFamily: 'OpenSans-Light',
     color: '#6f8381',

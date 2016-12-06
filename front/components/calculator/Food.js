@@ -110,7 +110,11 @@ class Food extends Component {
       })
     })
     .done();
-    Actions.profile();
+    this._next();
+  }
+
+  _next() {
+    this.props.dispatch(changeComp(6));
   }
 
   /********Component functions**********/
@@ -165,5 +169,6 @@ const stylesFood = StyleSheet.create({
 })
 
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  calcComponent: state.calcComponent
 } ) )(Food);
