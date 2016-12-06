@@ -99,7 +99,7 @@ class Energy extends Component {
   render() {
     return(
       <View style={stylesEnergy.container}>
-        <Text style={[styles.bigText, {marginBottom: 20}]}>Are you homeless?</Text>
+        <Text style={[styles.bigText, {marginBottom: 20}]}>One of the biggest sources of emissions on an individual scale is your home. Unless you're homeless, you're emitting. Are you homeless?</Text>
         <TouchableHighlight style={styles.button}
           onPress={this._sendEnergy.bind(this)}>
           <Text style={styles.buttonText}>No</Text>

@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
-import changeComp from '../../ducks/calcDuck';
+import {changeComp} from '../../ducks/calcDuck';
 
 import styles from './calcStyles';
 

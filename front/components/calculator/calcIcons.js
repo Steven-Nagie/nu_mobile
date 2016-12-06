@@ -14,58 +14,6 @@ import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
 
-module.exports = [
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
-  ],
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
-  ],
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
-  ],
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
-  ],
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
-  ],
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon-color.png')} />,
-  ],
-  [
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
-    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon-color.png')} />,
-  ],
-];
-
 const stylesCalculator = StyleSheet.create({
   header: {
     color: 'red',
@@ -127,3 +75,55 @@ const stylesCalculator = StyleSheet.create({
     alignItems: 'center'
   }
 })
+
+export default [
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+  ],
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+  ],
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+  ],
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+  ],
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon.png')} />,
+  ],
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon-color.png')} />,
+  ],
+  [
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/waste-icon-color.png')} />,
+    <Image style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/food-icon-color.png')} />,
+  ],
+];

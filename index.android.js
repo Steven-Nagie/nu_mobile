@@ -40,7 +40,7 @@ export default class nu extends Component {
         <RouterWithRedux>
           <Scene key="root">
 
-                {/*}<Scene
+                <Scene
                   key="loading"
                   component={Loading}
                   title="Nu.World"
@@ -52,7 +52,6 @@ export default class nu extends Component {
                   component={LogOrSign}
                   title="Nu.World"
                   hideNavBar
-                  initial
                 />
                 <Scene
                   key="signUp"
@@ -66,54 +65,6 @@ export default class nu extends Component {
                   title="Nu.World"
                   hideNavBar
                 />
-                <Scene
-                  key="profile"
-                  component={Profile}
-                  title="Your profile"
-                  hideNavBar
-                />
-                <Scene
-                  key="transport"
-                  component={Transport}
-                  title="Transport"
-                  hideNavBar
-                />
-                <Scene
-                  key="calculator"
-                  component={Calculator}
-                  title="Calculator"
-                  hideNavBar
-                />
-                <Scene
-                  key="transport"
-                  component={Transport}
-                  title="Transportation Calculator"
-                  hideNavBar
-                />
-                <Scene
-                  key="water"
-                  component={Water}
-                  title="Water Calculator"
-                  hideNavBar
-                />
-                <Scene
-                  key="waste"
-                  component={Waste}
-                  title="Waste Calculator"
-                  hideNavBar
-                />
-                <Scene
-                  key="energy"
-                  component={Energy}
-                  title="Energy Calculator"
-                  hideNavBar
-                />
-                <Scene
-                  key="food"
-                  component={Food}
-                  title="Food Calculator"
-                  hideNavBar
-                />*/}
                 <Scene
                   key="calculator"
                   component={Calculator}

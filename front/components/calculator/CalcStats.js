@@ -33,7 +33,9 @@ class CalcStats extends Component {
     super(props);
 
     this.state = {
-      totalScore: 0
+      totalScore: 0,
+      earths: 0,
+      percent: 0
     }
   }
 
@@ -61,7 +63,7 @@ class CalcStats extends Component {
   componentWillMount() {
     this._getScore();
   }
-  
+
   render() {
     let {height, width} = Dimensions.get('window');
     return(
@@ -73,18 +75,30 @@ class CalcStats extends Component {
           <View style={stylesStats.mainLeft}>
           </View>
           <View style={stylesStats.mainRight}>
-            <Text style={stylesStats.smallHeaderText}>
-              Overall Emissions
-            </Text>
-            <Text style={stylesStats.infoText}>
-              {this.state.totalScore} lbs of CO2 equivalent
-            </Text>
-            <Text style={stylesStats.smallHeaderText}>
-              Resources
-            </Text>
-            <Text style={stylesStats.smallHeaderText}>
-              Actions
-            </Text>
+            <View>
+              <Text style={stylesStats.smallHeaderText}>
+                Overall Emissions
+              </Text>
+              <Text style={stylesStats.infoText}>
+                {this.state.totalScore} lbs of CO2 equivalent
+              </Text>
+            </View>
+            <View>
+              <Text style={stylesStats.smallHeaderText}>
+                Resources
+              </Text>
+              <Text style={stylesStats.text}>
+                It takes {this.state.earths} Earths to support your current lifestyle.
+              </Text>
+            </View>
+            <View>
+              <Text style={stylesStats.smallHeaderText}>
+                Actions
+              </Text>
+              <Text style={stylesStats.text}>
+                You could reduce your emissions by <Text style={stylesStats.infoText}>{this.state.percent}%</Text>
+              </Text>
+            </View>
           </View>
         </View>
         <View style={stylesStats.buttonView}>
@@ -113,19 +127,20 @@ const stylesStats = StyleSheet.create({
     borderBottomColor: '#d3e8e6'
   },
   main: {
-    width: 260,
+    width: 300,
     height: 220,
     flexDirection: 'row'
   },
   mainLeft: {
     height: 220,
-    width: 130,
+    width: 150,
     alignItems: 'center',
     // justifyContent: ''
   },
   mainRight: {
     height: 220,
-    width: 130,
+    width: 150,
+    justifyContent: 'space-between'
   },
   smallHeaderText: {
     fontSize: 14,
@@ -136,7 +151,12 @@ const stylesStats = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'OpenSans-Bold',
     color: '#333333'
-  }
+  },
+  text: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    color: '#a6b1b0'
+  },
 })
 
 export default connect(state => ({
