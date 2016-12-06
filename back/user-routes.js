@@ -15,6 +15,7 @@ function createToken(user) {
 }
 
 // This function, which I copied from Auth0, is useful for checking that we parse the information correctly. However, I'll do this on the front end (I won't let the user send bad or incomplete info). This should provide a better experience for the user, who will immediately know if they made a mistake, and will ensure that the back end isn't getting all screwy.
+// Update, the following week: No I won't.
 function getUserScheme(req) {
 
   var username;
@@ -77,7 +78,6 @@ app.post('/users', function(req, res, next) {
   var firstname = req.body.firstname, lastname = req.body.lastname, state = req.body.state, email = req.body.email, password = req.body.password;
 
   db.create_user([firstname, lastname, state, email, password], function(err, user) {
-    console.log(user);
     if (err) {
       res.status(500).json(err);
     } else {
@@ -92,25 +92,21 @@ app.post('/users', function(req, res, next) {
 
 });
 
-app.post('/sessions/create', function(req, res) {
+app.post('/sessions/create', function(req, res, next) {
 
-  var userScheme = getUserScheme(req);
-
-  if (!userScheme.username || !req.body.password) {
-    return res.status(400).send("You must send the username and the password");
-  }
-
-  var user = _.find(users, userScheme.userSearch);
-
-  if (!user) {
-    return res.status(401).send("The username or password don't match");
-  }
-
-  if (user.password !== req.body.password) {
-    return res.status(401).send("The username or password don't match");
-  }
-
-  res.status(201).send({
-    id_token: createToken(user)
+  db.log_in([req.body.email, req.body.password], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else if (user[0]) {
+      res.status(201).json({
+        id_token: createToken(user),
+        user: user[0]
+      });
+    } else {
+      res.status(400).json({
+        message: "Email or password incorrect."
+      });
+    }
   });
+
 });

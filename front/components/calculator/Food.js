@@ -5,12 +5,16 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
+import changeComp from '../../ducks/calcDuck';
+
+import styles from './calcStyles';
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -92,7 +96,7 @@ class Food extends Component {
       food: foodScore
     });
     //Send score to database
-    fetch("http://10.0.0.21:3001/scores/waste", {
+    fetch("http://192.168.0.79:3001/scores/waste", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -106,7 +110,7 @@ class Food extends Component {
       })
     })
     .done();
-
+    Actions.profile();
   }
 
   /********Component functions**********/
@@ -117,33 +121,33 @@ class Food extends Component {
 
   render() {
     return(
-      <View style={stylesFood.container}>
-        <Text style={stylesFood.text}>Which of the following best describes your diet?</Text>
-        <TouchableHighlight style={stylesFood.button}
+      <ScrollView contentContainerStyle={stylesFood.contentContainer}>
+        <Text style={styles.bigText}>Which of the following best describes your diet?</Text>
+        <TouchableHighlight style={styles.button}
           onPress={this._foodCalc.bind(this, "average")}>
-          <Text>Average</Text>
+          <Text style={styles.buttonText}>Average</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={stylesFood.button}
+        <TouchableHighlight style={styles.button}
           onPress={this._foodCalc.bind(this, "extraMeat")}>
-          <Text>Extra Meaty</Text>
+          <Text style={styles.buttonText}>Extra Meaty</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={stylesFood.button}
+        <TouchableHighlight style={styles.button}
           onPress={this._foodCalc.bind(this, "noMeat")}>
-          <Text>No Red Meat</Text>
+          <Text style={styles.buttonText}>No Red Meat</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={stylesFood.button}
+        <TouchableHighlight style={styles.button}
           onPress={this._foodCalc.bind(this, "pesc")}>
-          <Text>Pescatarian</Text>
+          <Text style={styles.buttonText}>Pescatarian</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={stylesFood.button}
+        <TouchableHighlight style={styles.button}
           onPress={this._foodCalc.bind(this, "veg")}>
-          <Text>Vegetarian</Text>
+          <Text style={styles.buttonText}>Vegetarian</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={stylesFood.button}
+        <TouchableHighlight style={styles.button}
           onPress={this._foodCalc.bind(this, "vegan")}>
-          <Text>Vegan</Text>
+          <Text style={styles.buttonText}>Vegan</Text>
         </TouchableHighlight>
-      </View>
+      </ScrollView>
     )
   } //End render
 
@@ -151,24 +155,12 @@ class Food extends Component {
 
 
 const stylesFood = StyleSheet.create({
-  container: {
+  contentContainer: {
       flex: 1,
-      justifyContent: 'center',
+      paddingHorizontal: 10,
+      height: 500,
       alignItems: 'center',
-  },
-  text: {
-    fontFamily: 'OpenSans-Regular',
-    fontSize: 24,
-    textAlign: 'center'
-  },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 90,
-    width: 90,
-    // margin: 40,
-    padding: 20,
-    backgroundColor: 'blue'
+      justifyContent: 'space-between',
   }
 })
 

@@ -1,25 +1,37 @@
 module.exports = {
+  main: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+  },
+  header: {
+    top: 0
+  },
+  footer: {
+    bottom: 0
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   text: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
+    color: '#a6b1b0'
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   },
   button: {
+    backgroundColor: '#8bd1ca',
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    width: 50,
-    margin: 15,
-    // padding: 20,
-    backgroundColor: 'blue'
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 10
+    width: 100
   }
 }

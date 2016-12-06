@@ -17,6 +17,7 @@ import {createUser} from '../../ducks/userDuck.js';
 import store from 'react-native-simple-store';
 
 import Header from '../Header';
+import Footer from '../Footer';
 import Feed from './Feed';
 import Followers from './Followers';
 
@@ -59,7 +60,6 @@ class Profile extends Component {
   //******* RENDER COMPONENT *******
   render() {
     let {height, width} = Dimensions.get("window");
-    console.log(width);
     return(
         <View style={styles.main}>
           <View style={styles.header}>
@@ -101,6 +101,10 @@ class Profile extends Component {
               <Text style={styles.buttonText}>Go to calculator</Text>
             </TouchableHighlight>
           </ScrollView>
+
+          <View style={styles.footer}>
+            <Footer />
+          </View>
         </View>
     )
   }
@@ -193,7 +197,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  }
+  },
+  footer: {
+    bottom: 0
+  },
 })
 
 export default connect( state => ({

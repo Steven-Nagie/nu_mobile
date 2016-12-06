@@ -5,12 +5,16 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
+import { changeComp } from '../../ducks/calcDuck';
+
+import styles from './calcStyles';
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -104,7 +108,7 @@ class Waste extends Component {
       waste: wasteScore
     });
     //Send score to database
-    fetch("http://10.0.0.21:3001/scores/waste", {
+    fetch("http://192.168.0.79:3001/scores/waste", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -118,7 +122,7 @@ class Waste extends Component {
       })
     })
     .done();
-
+    this.props.dispatch(changeComp(5));
   }
 
   /********Component functions**********/
@@ -129,32 +133,39 @@ class Waste extends Component {
 
   render() {
     return(
-      <View>
-        <Text sytle={stylesWaste.text}>Recycling is great for the planet! Which of the following materials do you regularly recycle?</Text>
-        <Form
-          ref="form"
-          type={wasteForm}
-          options={options}
-        />
-        <TouchableHighlight style={stylesWaste.button}
+      <ScrollView contentContainerStyle={stylesWaste.contentContainer}>
+        <Text style={styles.bigText}>Recycling is great for the planet! Which of the following materials do you regularly recycle?</Text>
+        <View style={stylesWaste.form}>
+          <Form
+            ref="form"
+            type={wasteForm}
+            options={options}
+          />
+        </View>
+        <TouchableHighlight style={styles.button}
           onPress={this._wasteCalc.bind(this)}>
-          <Text>Submit</Text>
+          <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
-      </View>
+      </ScrollView>
     )
   }
 }
 
 const stylesWaste = StyleSheet.create({
-  container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
+    height: 550,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   text: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 24,
     textAlign: 'center'
+  },
+  form: {
+    width: 300
   },
   button: {
     justifyContent: 'center',

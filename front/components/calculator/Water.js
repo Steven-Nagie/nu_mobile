@@ -5,13 +5,17 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
-import styles from "../styles.js";
+import {changeComp} from '../../ducks/calcDuck';
+
+
+import styles from "./calcStyles.js";
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -87,7 +91,7 @@ class Water extends Component {
       water: waterScore
     });
     //Send score to database
-    fetch("http://10.0.0.21:3001/scores/water", {
+    fetch("http://192.168.0.79:3001/scores/water", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -101,7 +105,11 @@ class Water extends Component {
       })
     })
     .done();
+    this._next();
+  }
 
+  _next() {
+    this.props.dispatch(changeComp(4));
   }
 
 
@@ -113,8 +121,8 @@ class Water extends Component {
 
   render() {
     return(
-      <View style={styles.container}>
-        <Text style={styles.text}>How many gallons of water do you use a month? Check your water bill.</Text>
+      <ScrollView contentContainerStyle={waterStyles.contentContainer}>
+        <Text style={styles.bigText}>How many gallons of water do you use a month? Check your water bill.</Text>
         <Form
           ref="form"
           type={waterForm}
@@ -123,15 +131,25 @@ class Water extends Component {
         <TouchableHighlight style={styles.button} onPress={this._waterCalc.bind(this)}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
-        <Text style={styles.text}>Do you not know your water usage? That's fine. Click here and we'll give you an average.</Text>
+        <Text style={styles.bigText}>Do you not know your water usage? That's fine. Click here and we'll give you an average.</Text>
         <TouchableHighlight style={styles.button} onPress={this._dontKnow.bind(this)}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
-      </View>
+      </ScrollView>
     )
   }//Render stops here
 
 }
+
+const waterStyles = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
+    height: 500,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+})
 
 export default connect(state => ({
   user: state.user

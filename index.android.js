@@ -13,6 +13,8 @@ import store from "./front/store.js"
 /************IMPORT COMPONENTS***********/
 import Header from './front/components/Header';
 import Loading from './front/components/Loading';
+import LogOrSign from './front/components/LogOrSign';
+import LogIn from "./front/components/LogIn";
 import SignUp from './front/components/SignUp.js';
 import Profile from './front/components/profile/Profile.js';
 import Calculator from './front/components/calculator/Calculator.js';
@@ -38,9 +40,16 @@ export default class nu extends Component {
         <RouterWithRedux>
           <Scene key="root">
 
-                <Scene
+                {/*}<Scene
                   key="loading"
                   component={Loading}
+                  title="Nu.World"
+                  hideNavBar
+
+                />
+                <Scene
+                  key="logOrSign"
+                  component={LogOrSign}
                   title="Nu.World"
                   hideNavBar
                   initial
@@ -48,6 +57,12 @@ export default class nu extends Component {
                 <Scene
                   key="signUp"
                   component={SignUp}
+                  title="Nu.World"
+                  hideNavBar
+                />
+                <Scene
+                  key="logIn"
+                  component={LogIn}
                   title="Nu.World"
                   hideNavBar
                 />
@@ -63,7 +78,7 @@ export default class nu extends Component {
                   title="Transport"
                   hideNavBar
                 />
-                {/*<Scene
+                <Scene
                   key="calculator"
                   component={Calculator}
                   title="Calculator"
@@ -99,27 +114,19 @@ export default class nu extends Component {
                   title="Food Calculator"
                   hideNavBar
                 />*/}
-                {/*I think the trick to navigating subcomponents is to use Switch*/}
-                {/*<Scene
+                <Scene
                   key="calculator"
                   component={Calculator}
                   title="Calculator"
                   hideNavBar
-                >
-                  <Scene
-                    key="calcLanding"
-                    component={CalculatorLanding}
-                    title="Welcome to the Carbon Calculator"
-                    initial
-                    hideNavBar
-                  />
-                  <Scene
-                    key="water"
-                    component={Water}
-                    title="Water Calculator"
-                    hideNavBar
-                  />
-                </Scene>*/}
+                />
+                <Scene
+                  key="profile"
+                  component={Profile}
+                  title="Profile"
+                  hideNavBar
+                  initial
+                />
 
 
           </Scene>

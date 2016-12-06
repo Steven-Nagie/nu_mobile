@@ -11,6 +11,9 @@ import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import store from 'react-native-simple-store';
+import { changeComp } from '../../ducks/calcDuck';
+
+import styles from './calcStyles';
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -66,7 +69,7 @@ class Energy extends Component {
       energy: energyScore
     });
     //Send score to database
-    fetch("http://10.0.0.21:3001/scores/waste", {
+    fetch("http://192.168.0.79:3001/scores/waste", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -80,7 +83,11 @@ class Energy extends Component {
       })
     })
     .done();
+    this._next();
+  }
 
+  _next() {
+    this.props.dispatch(changeComp(3));
   }
 
   /********Component functions**********/
@@ -92,10 +99,10 @@ class Energy extends Component {
   render() {
     return(
       <View style={stylesEnergy.container}>
-        <Text style={stylesEnergy.text}>Are you homeless?</Text>
-        <TouchableHighlight style={stylesEnergy.button}
+        <Text style={[styles.bigText, {marginBottom: 20}]}>Are you homeless?</Text>
+        <TouchableHighlight style={styles.button}
           onPress={this._sendEnergy.bind(this)}>
-          <Text>No</Text>
+          <Text style={styles.buttonText}>No</Text>
         </TouchableHighlight>
       </View>
     )

@@ -14,8 +14,11 @@ export default class Header extends Component {
   render() {
     return(
       <View style={styles.main}>
-        <Image source={require('../images/nu-colorr.png')} />
-        <Image source={require('../images/page-1.png')} />
+        <TouchableHighlight onPress={Actions.calculator}>
+          <Image style={styles.icon} source={require('../images/footIcons/footprint.png')} />
+        </TouchableHighlight>
+        <Image style={styles.icon} source={require('../images/footIcons/trophy.png')} />
+        <Image style={styles.icon} source={require('../images/footIcons/stats.png')} />
       </View>
     )
   }
@@ -26,8 +29,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     height: 60,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingHorizontal: 10,
     alignItems: 'center'
+  },
+  icon: {
+    marginHorizontal: 30
   }
 })

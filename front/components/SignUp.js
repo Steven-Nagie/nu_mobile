@@ -61,7 +61,7 @@ class SignUp extends Component {
   _userSignup() {
   var value = this.refs.form.getValue();
   if (value) { // if validation fails, value will be null
-    fetch("http://10.0.0.21:3001/users", {
+    fetch("http://192.168.0.79:3001/users", {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -85,7 +85,7 @@ class SignUp extends Component {
         Alert.alert(
           "Signup Success!"
         );
-        // This is to push the user to the redux. However, I'm now sure that's necessary, since we're using the store package. Also, this value has the password, which is bad.
+        // This is to push the user to the redux. However, I'm not sure that's necessary, since we're using the store package. Also, this value has the password, which is bad.
         this.props.dispatch(createUser(_.pick(value, ['firstname', 'lastname', 'state', 'id'])));
         Actions.profile();
       }
@@ -94,35 +94,7 @@ class SignUp extends Component {
   }
 }
 
-_userLogin() {
-  /****For simplicity's sake during development, I simply push the user to profile page if there is a token. ****/
-  Actions.profile();
-  // var value = this.refs.form.getValue();
-  // if (value) { // if validation fails, value will be null
-  //   fetch("http://10.0.0.21:3001/sessions/create", {
-  //     method: "POST",
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       username: value.firstname,
-  //       password: value.password,
-  //     })
-  //   })
-  //   // .then((response) => response.json())
-  //   .then((responseData) => {
-  //     store.update('user', {
-  //       STORAGE_KEY: response.id_token
-  //     });
-  //     Alert.alert(
-  //       "Login Success!"
-  //     );
-  //     Actions.profile();
-  //   })
-  //   .done();
-  // }
-}
+
 
   //********** RENDER COMPONENT **************
 
@@ -139,9 +111,6 @@ _userLogin() {
       />
       <TouchableHighlight style={stylesSignUp.button} onPress={this._userSignup.bind(this)}>
       <Text style={stylesSignUp.buttonText}>Save New User</Text>
-      </TouchableHighlight>
-      <TouchableHighlight style={stylesSignUp.button} onPress={this._userLogin.bind(this)}>
-      <Text style={stylesSignUp.buttonText}>Log In</Text>
       </TouchableHighlight>
     </View>
     )

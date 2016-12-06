@@ -5,12 +5,17 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
+import bootstrap from './tcomb-form-native/lib/stylesheets/bootstrap';
 import store from 'react-native-simple-store';
+import { changeComp } from '../../ducks/calcDuck';
+
+import styles from './calcStyles.js';
 
 // Modify form width
 t.form.Form.stylesheet.textbox.normal.width = 100;
@@ -18,13 +23,14 @@ t.form.Form.stylesheet.textbox.error.width = 100;
 // Set Form
 const Form = t.form.Form;
 
+// let stylesheet = {}
+
 const airForm = t.struct({
   "totalFlights": t.Number
 });
 let options = {
-
-};
-
+  stylesheet: bootstrap
+}
 
 var transportScore = 0;
 var totalScore = 0;
@@ -73,7 +79,7 @@ class Transport extends Component {
       transport: transportScore
     });
     //Send score to database
-    fetch("http://10.0.0.21:3001/scores/transport", {
+    fetch("http://192.168.0.79:3001/scores/transport", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -90,6 +96,11 @@ class Transport extends Component {
       console.log(response);
     })
     .done();
+    this._next();
+  }
+
+  _next() {
+    this.props.dispatch(changeComp(2));
   }
 
 
@@ -100,50 +111,32 @@ class Transport extends Component {
 
   render() {
     return(
-      <View style={stylesTransport.container}>
-        <Text style={stylesTransport.text}>Do you own a car?</Text>
-          <TouchableHighlight style={stylesTransport.button} onPress={this._yes.bind(this)}>
-              <Text>Yes</Text>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.bigText}>Do you drive a car, truck or motorcycle?</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight style={styles.button} onPress={this._yes.bind(this)}>
+              <Text style={styles.buttonText}>Yes</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={stylesTransport.button} onPress={this._no.bind(this)}>
-              <Text>No</Text>
+          <TouchableHighlight style={styles.button} onPress={this._no.bind(this)}>
+              <Text style={styles.buttonText}>No</Text>
           </TouchableHighlight>
-        <Text style={stylesTransport.text}>How many times have you flown in the past year?</Text>
+        </View>
+        <Text style={styles.bigText}>How many times have you flown in the past year?</Text>
         <Form
           ref="form"
           type={airForm}
           options={options}
         />
-        <TouchableHighlight style={stylesTransport.button} onPress={this._airCalc.bind(this)}>
-          <Text>Submit</Text>
+        <TouchableHighlight style={styles.button} onPress={this._airCalc.bind(this)}>
+          <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
-      </View>
+      </ScrollView>
     )
   }//Render stops here
 
 }
 
-const stylesTransport = StyleSheet.create({
-  container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-  },
-  text: {
-    fontFamily: 'OpenSans-Regular',
-    fontSize: 24,
-    textAlign: 'center'
-  },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 90,
-    width: 90,
-    margin: 40,
-    padding: 20,
-    backgroundColor: 'blue'
-  }
-})
+
 
 export default connect(state => ({
   user: state.user

@@ -26,7 +26,7 @@ class Loading extends Component {
       } else {
         console.log(user);
         AUTH_TOKEN = user.STORAGE_KEY;
-        fetch("http://10.0.0.21:3001/auth", {
+        fetch("http://192.168.0.79:3001/auth", {
           method: "GET",
           headers: {
             'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -69,10 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
-  },
-  image: {
-    height: 150,
-    width: 150
   }
 })
 
