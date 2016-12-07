@@ -16,6 +16,7 @@ var Platform = require('react-native').Platform;
 var ImagePicker = require('react-native-image-picker');
 import { RNS3 } from 'react-native-aws3';
 import config from "../configPhoto.json";
+import { transferUtility } from 'react-native-s3';
 
   var options = {
     title: 'Select Avatar',
@@ -72,6 +73,7 @@ export default class Images extends Component {
       });
   }
 
+  /*********With react-native-aws3************/
   _sendPhoto() {
     let file = {
       uri: this.state.avatarSource.uri,
@@ -99,6 +101,15 @@ export default class Images extends Component {
         console.log(err);
       });
     }
+
+  /*******CLOUDINARY BASIC API POST***********/
+  // async _sendPhoto() {
+  //   try {
+  //     fetch("https://api.cloudinary.com/v1_1/nu-world/image/upload")
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
   render() {
     if (this.state.avatarSource) {

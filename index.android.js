@@ -47,13 +47,13 @@ export default class nu extends Component {
                   component={Images}
                   title="cukkkkk"
                   hideNavBar
-                  initial
                 />
                 <Scene
                   key="loading"
                   component={Loading}
                   title="Nu.World"
                   hideNavBar
+                  initial
                 />
                 <Scene
                   key="logOrSign"

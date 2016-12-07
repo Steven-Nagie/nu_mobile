@@ -78,7 +78,7 @@ const stylesCalculator = StyleSheet.create({
 })
 
 export default {
-  transport: [
+  transportation: [
     <Image key="6" style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/transportation-icon-color.png')} />,
     <Image key="7" style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/energy-icon.png')} />,
     <Image key="8" style={stylesCalculator.icons} source={require('../../images/calcLandingIcons/water-icon.png')} />,

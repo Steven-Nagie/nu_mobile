@@ -3,5 +3,7 @@ rootProject.name = 'nu'
 include ':app'
 include ':react-native-linear-gradient'
 include ':react-native-image-picker'
+include ':react-native-s3'
+project(':react-native-s3').projectDir = new File(settingsDir, '../node_modules/react-native-s3/android')
 project(':react-native-image-picker').projectDir = new File(settingsDir, '../node_modules/react-native-image-picker/android')
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')

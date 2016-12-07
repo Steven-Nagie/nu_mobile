@@ -4207,7 +4207,13 @@ react-native-router-flux@^3.37.0:
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
 
-react-native-simple-store@^1.1.0:
+react-native-s3@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/react-native-s3/-/react-native-s3-0.0.22.tgz#daa26b09be5f945a330c9a380547949918072ad8"
+  dependencies:
+    react-native-simple-store "^1.0.1"
+
+react-native-simple-store@^1.0.1, react-native-simple-store@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-simple-store/-/react-native-simple-store-1.1.0.tgz#69e91d6b91d362cd4ea12b0486df3eaf2f628b04"
   dependencies:

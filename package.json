@@ -24,12 +24,11 @@
 		"react-native-image-picker": "latest",
 		"react-native-linear-gradient": "^1.5.15",
 		"react-native-router-flux": "^3.37.0",
+		"react-native-s3": "^0.0.22",
 		"react-native-simple-store": "^1.1.0",
 		"react-redux": "^4.4.6",
 		"redux": "^3.6.0",
-		"tcomb-form-native": "^0.6.1",
-		"aws-sdk-react-native-core": "./aws-sd-react-native-core-0.0.1.tgz",
-		"aws-adk-react-native-transfer-utility": "./aws-sdk-react-native-transfer-utility-0.0.1.tgz",
+		"tcomb-form-native": "^0.6.1"
 	},
 	"devDependencies": {
 		"babel-jest": "17.0.2",

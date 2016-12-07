@@ -62,7 +62,7 @@ class ChallengeIndex extends Component {
         <View style={stylesIndex.container}>
           <View style={[stylesIndex.top, {width: width}]}>
             <View style={[stylesIndex.topIcons, {width: width}]}>
-              <TouchableHighlight onPress={() => {this.props.dispatch(changeChallenge('transport'))}}>
+              <TouchableHighlight onPress={() => {this.props.dispatch(changeChallenge('transportation'))}}>
                 {challengeIconsCurrent[0]}
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {this.props.dispatch(changeChallenge('energy'))}}>
