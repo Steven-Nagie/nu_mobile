@@ -13,7 +13,7 @@ CREATE TABLE users
   state VARCHAR(2),
   email TEXT UNIQUE,
   password TEXT,
-  title TEXT, 
+  title TEXT,
 	photo TEXT
 )
 
@@ -29,3 +29,6 @@ CREATE TABLE scores
 	userId INTEGER
 		REFERENCES users(id)
 )
+
+old massive set up information:
+'postgres://postgres:' + config.password + '@localhost/nu'

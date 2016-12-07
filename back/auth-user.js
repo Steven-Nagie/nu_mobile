@@ -5,7 +5,7 @@ var express = require('express'),
     massive = require('massive');
 
   var db = massive.connectSync({
-    connectionString: 'postgres://postgres:' + config.password + '@localhost/nu'
+    connectionString: 'postgres://ptmdqzga:' + config.password + '@elmer.db.elephantsql.com:5432/ptmdqzga'
   });
 
 var app = module.exports = express.Router();
