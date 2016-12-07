@@ -96,7 +96,7 @@ class Food extends Component {
       food: foodScore
     });
     //Send score to database
-    fetch("http://192.168.0.79:3001/scores/waste", {
+    fetch("http://104.236.79.194:3001/scores/waste", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
