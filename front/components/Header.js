@@ -17,7 +17,9 @@ export default class Header extends Component {
         <Image source={require('../images/nu-colorr.png')} />
         <View style={styles.right}>
           <Image source={require('../images/notification-bell.png')} />
-          <Image source={require('../images/steven.jpg')} style={styles.thumbnail} />
+          <TouchableHighlight onPress={Actions.profile}>
+            <Image source={require('../images/steven.jpg')} style={styles.thumbnail} />
+          </TouchableHighlight>
           <Image source={require('../images/triangle-header.png')} style={styles.triangle}/>
         </View>
       </View>

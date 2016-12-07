@@ -25,6 +25,7 @@ import Waste from "./front/components/calculator/Waste";
 import Food from "./front/components/calculator/Food";
 import Energy from "./front/components/calculator/Energy";
 import ChallengeIndex from "./front/components/challenges/ChallengeIndex";
+import Images from "./front/components/ImagePicker";
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -41,6 +42,13 @@ export default class nu extends Component {
         <RouterWithRedux>
           <Scene key="root">
 
+                <Scene
+                  key="images"
+                  component={Images}
+                  title="cukkkkk"
+                  hideNavBar
+                  initial
+                />
                 <Scene
                   key="loading"
                   component={Loading}
@@ -82,7 +90,6 @@ export default class nu extends Component {
                   component={ChallengeIndex}
                   title="Challenges"
                   hideNavBar
-                  initial
                 />
 
 

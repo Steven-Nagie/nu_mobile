@@ -41,3 +41,4 @@ android/app/libs
 *.keystore
 
 back/config.json
+front/configPhoto.json

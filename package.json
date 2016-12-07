@@ -20,12 +20,16 @@
 		"morgan": "^1.7.0",
 		"react": "~15.4.0-rc.4",
 		"react-native": "0.38.0",
+		"react-native-aws3": "^0.0.3",
+		"react-native-image-picker": "latest",
 		"react-native-linear-gradient": "^1.5.15",
 		"react-native-router-flux": "^3.37.0",
 		"react-native-simple-store": "^1.1.0",
 		"react-redux": "^4.4.6",
 		"redux": "^3.6.0",
-		"tcomb-form-native": "^0.6.1"
+		"tcomb-form-native": "^0.6.1",
+		"aws-sdk-react-native-core": "./aws-sd-react-native-core-0.0.1.tgz",
+		"aws-adk-react-native-transfer-utility": "./aws-sdk-react-native-transfer-utility-0.0.1.tgz",
 	},
 	"devDependencies": {
 		"babel-jest": "17.0.2",
