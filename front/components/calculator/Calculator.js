@@ -74,8 +74,8 @@ class Calculator extends Component {
       percentComplete = 100;
       percentProgress = 0;
     }
-    console.log(percentComplete);
   }
+
 
   render() {
     let stepComponent = componentArray[this.props.calcComponent];

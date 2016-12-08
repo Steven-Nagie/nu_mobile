@@ -16,12 +16,7 @@ var jwtCheck = jwt({
 
 app.use('/scores', jwtCheck);
 
-app.get('/scores', function(req, res, next) {
-  res.json("It's working now.");
-});
-
 app.put('/scores/transport', function(req, res, next) {
-  console.log(req.body);
   db.update_transport([req.body.total, req.body.transport, req.body.id], function(err, score) {
     if (err) {
       res.status(500).json(err);
@@ -44,6 +39,7 @@ app.put('/scores/water', function(req, res, next) {
 app.put('/scores/waste', function(req, res, next) {
   db.update_waste([req.body.total, req.body.waste, req.body.id], function(err, score) {
     if (err) {
+      console.log(err);
       res.status(500).json(err);
     } else {
       res.sendStatus(201);

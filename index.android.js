@@ -26,6 +26,7 @@ import Food from "./front/components/calculator/Food";
 import Energy from "./front/components/calculator/Energy";
 import ChallengeIndex from "./front/components/challenges/ChallengeIndex";
 import Images from "./front/components/ImagePicker";
+import Stats from "./front/components/Stats";
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -53,7 +54,6 @@ export default class nu extends Component {
                   component={Loading}
                   title="Nu.World"
                   hideNavBar
-                  initial
                 />
                 <Scene
                   key="logOrSign"
@@ -90,6 +90,13 @@ export default class nu extends Component {
                   component={ChallengeIndex}
                   title="Challenges"
                   hideNavBar
+                />
+                <Scene
+                  key="stats"
+                  component={Stats}
+                  title="Stats"
+                  hideNavBar
+                  initial
                 />
 
 

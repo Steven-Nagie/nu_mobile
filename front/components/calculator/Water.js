@@ -36,22 +36,22 @@ let userId;
 let AUTH_TOKEN;
 
 class Water extends Component {
+  constructor(props) {
+    super(props)
+
+  }
 
   async _checkUser() {
     try {
       const user = await store.get('user');
       if(!user) {
-        //In actual app you would want to shoot user back to sign in page.
-        // Actions.signUp();
-        console.log('There is no store data');
+        Actions.logOrSign();
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
         userId = user.id;
-        console.log(user);
-        console.log('this is the auth token ', AUTH_TOKEN)
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
@@ -59,13 +59,11 @@ class Water extends Component {
   async _getScore() {
     try{
       const score = await store.get('score');
-      console.log(score);
       if (score) {
         totalScore = score.total;
-        console.log(totalScore);
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
@@ -73,18 +71,17 @@ class Water extends Component {
   _waterCalc() {
     var gallons = this.refs.form.getValue();
     waterScore = gallons.totalGallons * 0.0052;
-    console.log("Here's the calculated total: ", waterScore);
+    totalScore += Math.round(waterScore);
     this._sendWater();
   }
 
   _dontKnow() {
-    waterScore = 15.61;
-    console.log('heres the dont know total: ', waterScore)
+    waterScore = Math.round(15.61);
+    totalScore += waterScore;
     this._sendWater();
   }
 
   _sendWater() {
-    totalScore += waterScore;
     // Save score to simple-store
     store.update('score', {
       total: totalScore,
@@ -115,8 +112,8 @@ class Water extends Component {
 
   /********Component functions**********/
   componentWillMount() {
-    this._getScore();
     this._checkUser();
+    setTimeout(() => {this._getScore();}, 500)
   }
 
   render() {
@@ -145,6 +142,7 @@ const waterStyles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingHorizontal: 10,
+    paddingBottom: 20,
     height: 500,
     alignItems: 'center',
     justifyContent: 'space-between',

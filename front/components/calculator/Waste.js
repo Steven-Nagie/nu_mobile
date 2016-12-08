@@ -39,22 +39,21 @@ let AUTH_TOKEN;
 let wasteScore = 58;
 
 class Waste extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   async _checkUser() {
     try {
       const user = await store.get('user');
       if(!user) {
-        //In actual app you would want to shoot user back to sign in page.
-        // Actions.signUp();
-        console.log('There is no store data');
+        Actions.logorSign();
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
         userId = user.id;
-        console.log(user);
-        console.log('this is the auth token ', AUTH_TOKEN)
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
@@ -62,20 +61,17 @@ class Waste extends Component {
   async _getScore() {
     try{
       const score = await store.get('score');
-      console.log(score);
       if (score) {
         totalScore = score.total;
-        console.log(totalScore);
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
   /*****CALCULATIONS******/
   _wasteCalc() {
     var answers = this.refs.form.getValue();
-    console.log(answers);
     if (answers.metal) {
       wasteScore -= 7
     }
@@ -95,7 +91,6 @@ class Waste extends Component {
     if (answers.magazines) {
       wasteScore -= 2
     }
-
     this._sendWaste();
   }
 
@@ -127,7 +122,7 @@ class Waste extends Component {
 
   /********Component functions**********/
   componentWillMount() {
-    this._getScore();
+    setTimeout(() => {this._getScore()}, 1000);
     this._checkUser();
   }
 
@@ -155,7 +150,8 @@ const stylesWaste = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingHorizontal: 10,
-    height: 550,
+    paddingBottom: 20,
+    height: 570,
     alignItems: 'center',
     justifyContent: 'space-between',
   },

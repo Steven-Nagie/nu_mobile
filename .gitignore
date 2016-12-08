@@ -43,3 +43,5 @@ android/app/libs
 back/config.json
 front/configPhoto.json
 android/app/src/main/java/com/nu/configPhoto.json
+android/app/my-release-key.keystore
+android/gradle.properties

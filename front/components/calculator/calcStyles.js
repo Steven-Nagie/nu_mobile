@@ -2,6 +2,7 @@ module.exports = {
   contentContainer: {
     flex: 1,
     paddingHorizontal: 10,
+    paddingVertical: 20,
     height: 400,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -31,6 +32,15 @@ module.exports = {
     height: 50,
     width: 100
   },
+  buttonOff: {
+    borderColor: '#8bd1ca',
+    borderWidth: 1,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: 100
+  },
   text: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
@@ -38,10 +48,16 @@ module.exports = {
     color: '#a6b1b0'
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'white',
     alignSelf: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'OpenSans-Semibold'
+  },
+  buttonTextOff: {
+    color: '#8bd1ca',
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: 16,
   },
   buttonContainer: {
     flexDirection: 'row',

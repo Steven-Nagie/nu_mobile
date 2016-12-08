@@ -36,7 +36,7 @@ class Loading extends Component {
         }).then(function (response) {
             console.log(response);
             if (response.status === 401) {
-              Actions.signUp();
+              Actions.logOrSign();
             } else if (response.status === 200) {
               // Have to figure out how to get proper scope for this:
               // this.props.dispatch(createUser(user));

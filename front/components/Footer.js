@@ -20,7 +20,9 @@ export default class Header extends Component {
         <TouchableHighlight onPress={Actions.challenges}>
           <Image style={styles.icon} source={require('../images/footIcons/trophy.png')} />
         </TouchableHighlight>
-        <Image style={styles.icon} source={require('../images/footIcons/stats.png')} />
+        <TouchableHighlight onPress={Actions.stats}>
+          <Image style={styles.icon} source={require('../images/footIcons/stats.png')} />
+        </TouchableHighlight>
       </View>
     )
   }

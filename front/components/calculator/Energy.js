@@ -24,25 +24,24 @@ const Form = t.form.Form;
 let totalScore;
 let userId;
 let AUTH_TOKEN;
-let energyScore = 1303;
 
 class Energy extends Component {
+  constructor(props) {
+    super(props)
+
+  }
 
   async _checkUser() {
     try {
       const user = await store.get('user');
       if(!user) {
-        //In actual app you would want to shoot user back to sign in page.
-        // Actions.signUp();
-        console.log('There is no store data');
+        Actions.logOrSign();
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
         userId = user.id;
-        console.log(user);
-        console.log('this is the auth token ', AUTH_TOKEN)
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
@@ -50,26 +49,26 @@ class Energy extends Component {
   async _getScore() {
     try{
       const score = await store.get('score');
-      console.log(score);
       if (score) {
         totalScore = score.total;
-        console.log(totalScore);
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
   /*********CALCULATIONS***********/
   _sendEnergy() {
+    let energyScore = 1303;
     totalScore += energyScore;
+    console.log(totalScore + " total score");
     // Save score to simple-store
     store.update('score', {
       total: totalScore,
       energy: energyScore
     });
     //Send score to database
-    fetch("http://104.236.79.194:3001/scores/waste", {
+    fetch("http://104.236.79.194:3001/scores/energy", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -92,8 +91,8 @@ class Energy extends Component {
 
   /********Component functions**********/
   componentWillMount() {
-    this._getScore();
     this._checkUser();
+    setTimeout(() => {this._getScore()}, 1000);
   }
 
   render() {
@@ -114,6 +113,7 @@ class Energy extends Component {
 const stylesEnergy = StyleSheet.create({
   container: {
       flex: 1,
+      paddingBottom: 20,
       justifyContent: 'center',
       alignItems: 'center',
   },

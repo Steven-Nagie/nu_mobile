@@ -34,33 +34,25 @@ class CalcStats extends Component {
 
     this.state = {
       totalScore: 0,
-      earths: 0,
     }
   }
 
   async _getScore() {
     try {
       const score = await store.get('score');
-      console.log(score);
       if(score){
         this.setState({
           totalScore: score.total
         })
-        totalScore = score.total;
-        transportScore = score.transport;
-        energyScore = score.energy;
-        waterScore = score.water;
-        wasteScore = score.waste;
-        foodScore = score.food;
       }
 
     } catch(err) {
-      console.log(err)
+      Alert.alert(err)
     }
   }
 
   componentWillMount() {
-    this._getScore();
+    setTimeout(() => {this._getScore()}, 1000);
   }
 
   render() {
@@ -99,7 +91,10 @@ class CalcStats extends Component {
           </View>
         </View>
         <View style={stylesStats.buttonView}>
-          <TouchableHighlight style={styles.button}>
+          <TouchableHighlight style={[styles.button, {marginRight: 10}]} onPress={Actions.challenges}>
+            <Text style={styles.buttonText}>See How</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={Actions.profile}>
             <Text style={styles.buttonText}>Go to Profile</Text>
           </TouchableHighlight>
         </View>
@@ -162,6 +157,9 @@ const stylesStats = StyleSheet.create({
   miniView: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  buttonView: {
+    flexDirection: 'row'
   }
 })
 

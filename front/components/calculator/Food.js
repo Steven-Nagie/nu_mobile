@@ -28,22 +28,22 @@ let AUTH_TOKEN;
 let foodScore;
 
 class Food extends Component {
+  constructor(props) {
+    super(props)
+
+  }
 
   async _checkUser() {
     try {
       const user = await store.get('user');
       if(!user) {
-        //In actual app you would want to shoot user back to sign in page.
-        // Actions.signUp();
-        console.log('There is no store data');
+        Actions.logOrSign();
       } else {
         AUTH_TOKEN = user.STORAGE_KEY;
         userId = user.id;
-        console.log(user);
-        console.log('this is the auth token ', AUTH_TOKEN)
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
@@ -51,13 +51,11 @@ class Food extends Component {
   async _getScore() {
     try{
       const score = await store.get('score');
-      console.log(score);
       if (score) {
         totalScore = score.total;
-        console.log(totalScore);
       }
     } catch(err) {
-      console.log(err);
+      Alert.alert(err);
     }
   }
 
@@ -85,18 +83,26 @@ class Food extends Component {
       default:
         console.log("something's happening");
     }
+    totalScore += foodScore;
     this._sendFood();
   }
 
+  async _updateStore() {
+    try {
+      await store.update('score', {
+        total: totalScore,
+        food: foodScore
+      });
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   _sendFood() {
-    totalScore += foodScore;
     // Save score to simple-store
-    store.update('score', {
-      total: totalScore,
-      food: foodScore
-    });
+    this._updateStore();
     //Send score to database
-    fetch("http://104.236.79.194:3001/scores/waste", {
+    fetch("http://104.236.79.194:3001/scores/food", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -119,7 +125,7 @@ class Food extends Component {
 
   /********Component functions**********/
   componentWillMount() {
-    this._getScore();
+    setTimeout(() => {this._getScore()}, 1000);
     this._checkUser();
   }
 
@@ -162,6 +168,7 @@ const stylesFood = StyleSheet.create({
   contentContainer: {
       flex: 1,
       paddingHorizontal: 10,
+      paddingBottom: 20,
       height: 500,
       alignItems: 'center',
       justifyContent: 'space-between',
