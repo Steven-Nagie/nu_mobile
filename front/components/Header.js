@@ -14,10 +14,13 @@ export default class Header extends Component {
   render() {
     return(
       <View style={styles.main}>
-        <Image source={require('../images/nu-colorr.png')} />
+        <TouchableHighlight onPress={Actions.profile}>
+          <Image source={require('../images/nu-colorr.png')} />
+        </TouchableHighlight>
+        <Image source={require('../images/search.png')} />
         <View style={styles.right}>
           <Image source={require('../images/notification-bell.png')} />
-          <TouchableHighlight onPress={Actions.profile}>
+          <TouchableHighlight onPress={Actions.settings}>
             <Image source={require('../images/steven.jpg')} style={styles.thumbnail} />
           </TouchableHighlight>
           <Image source={require('../images/triangle-header.png')} style={styles.triangle}/>

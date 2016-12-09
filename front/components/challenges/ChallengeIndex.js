@@ -59,6 +59,7 @@ class ChallengeIndex extends Component {
         <View style={styles.header}>
           <Header />
         </View>
+
         <View style={stylesIndex.container}>
           <View style={[stylesIndex.top, {width: width}]}>
             <View style={[stylesIndex.topIcons, {width: width}]}>

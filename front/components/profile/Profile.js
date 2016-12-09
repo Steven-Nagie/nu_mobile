@@ -28,13 +28,11 @@ class Profile extends Component {
 
 /******FUNCTIONS******/
   async _checkUser() {
-    console.log('calling checkuser with store');
     try {
       const user = await store.get('user');
       if (!user) {
         console.log('There is no store data');
       } else {
-        console.log(user);
         this.props.dispatch(createUser(user));
       }
     } catch(err) {
@@ -65,9 +63,10 @@ class Profile extends Component {
           <View style={styles.header}>
             <Header />
           </View>
+
           <ScrollView contentContainerStyle={styles.contentContainer}>
 
-            <Image source={require('../../images/steven.jpg')} style={[styles.banner,  {width: width}]}>
+            <Image source={require('../../images/banner-background.jpg')} style={[styles.banner,  {width: width}]}>
               <View style={styles.imageContainer}>
                 <Image style={styles.profilePic} source={require('../../images/steven.jpg')} />
               </View>
@@ -79,11 +78,14 @@ class Profile extends Component {
               </View>
 
               <View style={[styles.bannerSmall, {width: width}]}>
-                <Text style={styles.name}>{this.props.user.firstname}</Text>
+                <Text style={styles.name}>{this.props.user.firstname + " " + this.props.user.lastname}</Text>
                 <TouchableHighlight>
-                  <Text style={styles.title}>Title</Text>
+                  <Text style={styles.title}>{this.props.user.title}</Text>
                 </TouchableHighlight>
-                <Text style={styles.location}>{this.props.user.state}</Text>
+                <View style={styles.locationView}>
+                  <Image source={require('../../images/location-pin.png')} />
+                  <Text style={styles.location}>{this.props.user.state}</Text>
+                </View>
               </View>
 
             </Image>
@@ -99,11 +101,6 @@ class Profile extends Component {
           <View style={[styles.buttonContainer, {width: width}]}>
             <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
             <Text style={styles.buttonText}>Log Out</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-            style={styles.button}
-            onPress={Actions.calculator}>
-            <Text style={styles.buttonText}>Go to calculator</Text>
             </TouchableHighlight>
           </View>
 
@@ -169,20 +166,23 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: 'OpenSans-Semibold',
-    fontSize: 54,
+    fontSize: 32,
     color: '#ffffff'
     // In ios we will add letterSpacing: 1.64
   },
   title: {
     color: '#8bd1ca',
     fontFamily: 'OpenSans-Semibold',
-    fontSize: 36
+    fontSize: 21
     //iOS add letterSpacing: 1.09
+  },
+  locationView: {
+    flexDirection: "row",
   },
   location: {
     color: '#ffffff',
     fontFamily: 'OpenSans-Semibold',
-    fontSize: 27
+    fontSize: 14
   },
   // SubScene styles
   subScene: {

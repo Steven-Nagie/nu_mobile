@@ -4,7 +4,7 @@ export function changeChallenge(challenge) {
   return {type: CHANGE_CHALLENGE, challenge}
 }
 
-const initialState = "food";
+const initialState = "transportation";
 
 export default function reducer (state=initialState, action) {
   switch( action.type ) {

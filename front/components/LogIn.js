@@ -46,6 +46,8 @@ class LogIn extends Component {
       firstname: first,
       lastname: last,
       state: state,
+      interests: "Interests",
+      title: "Title",
       STORAGE_KEY: token
     });
   }

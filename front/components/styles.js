@@ -1,7 +1,7 @@
 module.exports = {
   main: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F7F7F7',
   },
   header: {
     top: 0
@@ -13,7 +13,7 @@ module.exports = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F7F7F7',
   },
   h1: {
     fontFamily: 'OpenSans-Light',

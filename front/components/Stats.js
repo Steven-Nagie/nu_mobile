@@ -74,7 +74,6 @@ export default class Stats extends Component {
     let {height, width} = Dimensions.get('window');
     // Maybe do quotes around image tag since we're outsie return statement here
     const earthImage = <Image style={styles.earth} source={require('../images/earth.png')}/>
-    const earthImages = [earthImage, earthImage, earthImage];
     return(
       <View style={styles.main}>
         <View style={styles.header}>
@@ -95,7 +94,15 @@ export default class Stats extends Component {
                 <Text style={styles.footprintHead}>Leaderboard</Text>
               </View>
 
-              <Leaderboard />
+
+                <Leaderboard user width={((width * .3) * 1)} name="Steven Nagie"
+                score="1000" rank="1"/>
+                <Leaderboard width={((width * .3) * 1)} name="Bobby Fisher" score="1000" rank="2" />
+                <Leaderboard width={((width * .3) * 1)} name="Robert Donk" score="1000" rank="3" />
+                <Leaderboard width={((width * .3) * 1)} name="John King" score="1000" rank="4" />
+                <Leaderboard width={((width * .3) * 1)} name="Earl Sweatshirt" score="1000" rank="5" />
+                <Leaderboard width={((width * .3) * 1)} name="Bobby Fisher" score="1000" rank="6" />
+
 
             </View>
           </View>
@@ -123,7 +130,9 @@ export default class Stats extends Component {
               <Text style={styles.headText}>Resources</Text>
               <Text style={styles.text}>It takes {this.state.earths} Earths to support your current lifestyle.</Text>
               <View style={[styles.earthsContainer, {width: (width * .6)}]}>
-                {earthImages}
+                {earthImage}
+                {earthImage}
+                {earthImage}
               </View>
             </View>
 

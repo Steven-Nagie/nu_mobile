@@ -91,11 +91,14 @@ class CalcStats extends Component {
           </View>
         </View>
         <View style={stylesStats.buttonView}>
-          <TouchableHighlight style={[styles.button, {marginRight: 10}]} onPress={Actions.challenges}>
-            <Text style={styles.buttonText}>See How</Text>
+          <TouchableHighlight style={[stylesStats.button, {marginRight: 10}]} onPress={Actions.challenges}>
+            <Text style={stylesStats.buttonText}>See How</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={Actions.profile}>
-            <Text style={styles.buttonText}>Go to Profile</Text>
+          <TouchableHighlight style={[stylesStats.button, {marginRight: 10}]} onPress={Actions.stats}>
+            <Text style={stylesStats.buttonText}>More Details</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={stylesStats.button} onPress={Actions.profile}>
+            <Text style={stylesStats.buttonText}>Go to Profile</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -160,7 +163,22 @@ const stylesStats = StyleSheet.create({
   },
   buttonView: {
     flexDirection: 'row'
-  }
+  },
+  button: {
+    backgroundColor: '#8bd1ca',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 35,
+    width: 70
+  },
+  buttonText: {
+    fontSize: 12,
+    color: 'white',
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontFamily: 'OpenSans-Semibold'
+  },
 })
 
 export default connect(state => ({

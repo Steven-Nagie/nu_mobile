@@ -27,6 +27,7 @@ import Energy from "./front/components/calculator/Energy";
 import ChallengeIndex from "./front/components/challenges/ChallengeIndex";
 import Images from "./front/components/ImagePicker";
 import Stats from "./front/components/Stats";
+import Settings from './front/components/profile/Settings.js';
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -95,6 +96,12 @@ export default class nu extends Component {
                   key="stats"
                   component={Stats}
                   title="Stats"
+                  hideNavBar
+                />
+                <Scene
+                  key="settings"
+                  component={Settings}
+                  title="Settings"
                   hideNavBar
                   initial
                 />
