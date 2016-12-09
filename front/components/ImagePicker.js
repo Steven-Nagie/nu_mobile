@@ -38,7 +38,8 @@ export default class Images extends Component {
     super(props)
 
     this.state = {
-      avatarSource: null
+      avatarSource: null,
+      sendSource: null
     }
   }
 
@@ -58,6 +59,7 @@ export default class Images extends Component {
         else {
           // You can display the image using either data...
           const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+          const sourceForS3 = response.uri;
 
           // or a reference to the platform specific asset location
           if (Platform.OS === 'ios') {
@@ -67,7 +69,8 @@ export default class Images extends Component {
           }
 
           this.setState({
-            avatarSource: source
+            avatarSource: source,
+            sendSource: sourceForS3
           });
         }
       });
@@ -75,15 +78,16 @@ export default class Images extends Component {
 
   /*********With react-native-aws3************/
   _sendPhoto() {
+    console.log(this.state.sendSource);
     let file = {
-      uri: this.state.avatarSource.uri,
+      uri: this.state.sendSource,
       name: "Baby's first image",
       type: "image/jpeg"
     };
 
     let sendOptions = {
       keyPrefix: "uploads/",
-      bucket: "nu.photos",
+      bucket: "nu-photos",
       region: "us-east-1",
       accessKey: config.access,
       secretKey: config.secretAccess,
@@ -93,7 +97,7 @@ export default class Images extends Component {
       RNS3.put(file, sendOptions).progress((e) => console.log(e.loaded / e.total)).then(response => {
         if (response.status !== 201) {
           throw new Error("Failed to upload image to S3");
-          console.log(response.body);
+          console.log(response);
         } else {
           console.log(response);
         }
