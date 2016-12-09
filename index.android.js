@@ -55,6 +55,7 @@ export default class nu extends Component {
                   component={Loading}
                   title="Nu.World"
                   hideNavBar
+                  initial
                 />
                 <Scene
                   key="logOrSign"
@@ -103,7 +104,6 @@ export default class nu extends Component {
                   component={Settings}
                   title="Settings"
                   hideNavBar
-                  initial
                 />
 
 

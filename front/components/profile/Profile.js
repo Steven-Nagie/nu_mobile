@@ -10,11 +10,14 @@ import {
   Dimensions,
   TextInput,
   ScrollView,
+  TouchableWithoutFeedback
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {createUser} from '../../ducks/userDuck.js';
 import store from 'react-native-simple-store';
+
+const dismissKeyboard = require('dismissKeyboard');
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -23,8 +26,14 @@ import Followers from './Followers';
 
 let width;
 let height;
+let profilePic;
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
 
 /******FUNCTIONS******/
   async _checkUser() {
@@ -43,7 +52,7 @@ class Profile extends Component {
   async _userLogout() {
     try {
       await store.delete('user');
-      Actions.signUp();
+      Actions.logOrSign();
       Alert.alert("Logout Success!");
     } catch (error) {
       console.log('Storage error: ' + error.message);
@@ -58,7 +67,15 @@ class Profile extends Component {
   //******* RENDER COMPONENT *******
   render() {
     let {height, width} = Dimensions.get("window");
+    if (!this.props.user.image) {
+      profilePic =
+        <Image style={styles.profilePic} source={require('../../images/steven.jpg')} />
+    } else {
+      profilePic =
+        <Image style={styles.profilePic} source={this.props.user.image} />
+    }
     return(
+      <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
         <View style={styles.main}>
           <View style={styles.header}>
             <Header />
@@ -68,7 +85,7 @@ class Profile extends Component {
 
             <Image source={require('../../images/banner-background.jpg')} style={[styles.banner,  {width: width}]}>
               <View style={styles.imageContainer}>
-                <Image style={styles.profilePic} source={require('../../images/steven.jpg')} />
+                {profilePic}
               </View>
 
               <View style={[styles.bannerLinks, {width: width}]}>
@@ -108,6 +125,7 @@ class Profile extends Component {
             <Footer />
           </View>
         </View>
+      </TouchableWithoutFeedback>
     )
   }
 }

@@ -73,7 +73,6 @@ function createScore(id) {
 }
 
 app.post('/users', function(req, res, next) {
-  console.log('users is working');
 
   var firstname = req.body.firstname, lastname = req.body.lastname, state = req.body.state, email = req.body.email, password = req.body.password;
 
@@ -91,6 +90,26 @@ app.post('/users', function(req, res, next) {
 
 
 });
+
+app.put('/users/title', function(req, res, next) {
+  db.update_title([req.body.title, req.body.id], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.sendStatus(201);
+    }
+  })
+})
+
+app.put('/users/interests', function(req, res, next) {
+  db.update_interests([req.body.interests, req.body.id], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.sendStatus(201);
+    }
+  })
+})
 
 app.post('/sessions/create', function(req, res, next) {
 

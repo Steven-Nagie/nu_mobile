@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TouchableHighlight,
   Dimensions,
-  Image
+  Image,
+  TouchableWithoutFeedback
 } from 'react-native';
 import { connect } from "react-redux";
 import { Actions } from 'react-native-router-flux';
@@ -29,6 +30,8 @@ import Water from './Water';
 import Waste from './Waste';
 import Food from './Food';
 import CalcStats from "./CalcStats.js";
+
+const dismissKeyboard = require('dismissKeyboard');
 
 
 let width;
@@ -83,6 +86,7 @@ class Calculator extends Component {
     let {height, width} = Dimensions.get("window");
     let calcIconsCurrent = calcIcons[this.props.calcComponent];
     return(
+      <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
       <View style={styles.main}>
         <View style={styles.header}>
           <Header />
@@ -119,6 +123,7 @@ class Calculator extends Component {
           <Footer />
         </View>
       </View>
+      </TouchableWithoutFeedback>
     )
   }//End of render statement
 

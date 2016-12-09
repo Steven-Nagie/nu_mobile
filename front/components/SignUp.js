@@ -5,7 +5,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableWithoutFeedback
 } from 'react-native';
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -13,6 +14,8 @@ import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import {createUser} from '../ducks/userDuck.js';
 import store from 'react-native-simple-store';
+
+const dismissKeyboard = require('dismissKeyboard');
 
 import styles from "./styles";
 
@@ -104,6 +107,7 @@ class SignUp extends Component {
 
   render() {
     return(
+    <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
     <View style={stylesSignUp.container}>
       <Text style={styles.h1}
       onPress={() =>Actions.profile()}>Welcome to Nu.world</Text>
@@ -117,6 +121,7 @@ class SignUp extends Component {
         <Text style={stylesSignUp.buttonText}>Save New User</Text>
       </TouchableHighlight>
     </View>
+    </TouchableWithoutFeedback>
     )
   }
 }

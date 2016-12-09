@@ -6,7 +6,8 @@ import {
   Text,
   StyleSheet,
   TouchableHighlight,
-  Image
+  Image,
+  TouchableWithoutFeedback
 } from 'react-native';
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -14,6 +15,8 @@ import { Actions } from 'react-native-router-flux';
 import t from "tcomb-form-native";
 import {createUser} from '../ducks/userDuck.js';
 import store from 'react-native-simple-store';
+
+const dismissKeyboard = require('dismissKeyboard');
 
 import styles from './styles';
 
@@ -40,14 +43,15 @@ let options = {
 
 class LogIn extends Component {
 
-  _saveUser(id, first, last, state, token) {
+  _saveUser(id, first, last, state, title, interests, token) {
     store.save('user', {
       id: id,
       firstname: first,
       lastname: last,
       state: state,
-      interests: "Interests",
-      title: "Title",
+      image: null,
+      interests: interests,
+      title: title,
       STORAGE_KEY: token
     });
   }
@@ -71,7 +75,7 @@ class LogIn extends Component {
         if (response.message) {
           Alert.alert("You may have misspelled your email or password.");
         } else {
-          this._saveUser(response.user.id, response.user.firstname, response.user.lastname, response.user.state, response.id_token);
+          this._saveUser(response.user.id, response.user.firstname, response.user.lastname, response.user.state, response.user.title, response.user.interests, response.id_token);
           Alert.alert(
             "Login Success!"
           );
@@ -84,6 +88,7 @@ class LogIn extends Component {
 
   render() {
     return(
+      <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
       <View style={styles.container}>
 
       <Image source={require('../images/nu-colorr.png')} style={{marginBottom: 10}} />
@@ -98,6 +103,7 @@ class LogIn extends Component {
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableHighlight>
       </View>
+      </TouchableWithoutFeedback>
     )
   }
 
