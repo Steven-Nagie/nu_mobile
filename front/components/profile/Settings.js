@@ -229,6 +229,7 @@ class Settings extends Component {
         } else {
           imageLocation = response.body.postResponse.location;
           this._sendPhotoHome();
+          this._submitPhoto(imageLocation);
         }
       }).catch(err => {
         Alert.alert(err);

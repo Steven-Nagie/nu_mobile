@@ -18,13 +18,11 @@ import store from 'react-native-simple-store';
 class Loading extends Component {
 
   async _authUser() {
-    console.log('calling checkuser with store');
     try {
       const user = await store.get('user');
       if (!user) {
         Actions.logOrSign();
       } else {
-        console.log(user);
         AUTH_TOKEN = user.STORAGE_KEY;
         fetch("http://104.236.79.194:3001/auth", {
           method: "GET",
@@ -34,7 +32,6 @@ class Loading extends Component {
             'Content-Type': 'application/json'
           }
         }).then(function (response) {
-            console.log(response);
             if (response.status === 401) {
               Actions.logOrSign();
             } else if (response.status === 200) {
