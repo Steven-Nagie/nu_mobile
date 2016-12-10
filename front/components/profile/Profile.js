@@ -72,7 +72,7 @@ class Profile extends Component {
         <Image style={styles.profilePic} source={require('../../images/steven.jpg')} />
     } else {
       profilePic =
-        <Image style={styles.profilePic} source={this.props.user.image} />
+        <Image style={styles.profilePic} source={{uri: this.props.user.image}} />
     }
     return(
       <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>

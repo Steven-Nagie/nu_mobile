@@ -26,7 +26,7 @@ class Loading extends Component {
       } else {
         console.log(user);
         AUTH_TOKEN = user.STORAGE_KEY;
-        fetch("http://192.168.0.79:3001/auth", {
+        fetch("http://104.236.79.194:3001/auth", {
           method: "GET",
           headers: {
             'Authorization': 'Bearer ' + AUTH_TOKEN,

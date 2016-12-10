@@ -68,7 +68,7 @@ class SignUp extends Component {
   _userSignup() {
   var value = this.refs.form.getValue();
   if (value) { // if validation fails, value will be null
-    fetch("http://192.168.0.79:3001/users", {
+    fetch("http://104.236.79.194:3001/users", {
       method: "POST",
       headers: {
         'Accept': 'application/json',

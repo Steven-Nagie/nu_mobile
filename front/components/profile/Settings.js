@@ -88,7 +88,7 @@ class Settings extends Component {
   }
 
   _sendInterests() {
-    fetch("http://192.168.0.79:3001/users/interests", {
+    fetch("http://104.236.79.194:3001/users/interests", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -121,7 +121,7 @@ class Settings extends Component {
   }
 
   _sendTitle() {
-    fetch("http://192.168.0.79:3001/users/title", {
+    fetch("http://104.236.79.194:3001/users/title", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -189,7 +189,7 @@ class Settings extends Component {
   }
 
   _getAccess() {
-    fetch("http://192.168.0.79:3001/photos/access", {
+    fetch("http://104.236.79.194:3001/photos/access", {
       method: "GET",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -236,7 +236,7 @@ class Settings extends Component {
     }
 
     _sendPhotoHome() {
-      fetch("http://192.168.0.79:3001/photos/upload", {
+      fetch("http://104.236.79.194:3001/photos/upload", {
         method: "PUT",
         headers: {
           'Authorization': 'Bearer ' + AUTH_TOKEN,

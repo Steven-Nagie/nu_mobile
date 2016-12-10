@@ -43,23 +43,24 @@ let options = {
 
 class LogIn extends Component {
 
-  _saveUser(id, first, last, state, title, interests, token) {
+  _saveUser(id, first, last, state, title, interests, photo, token) {
     store.save('user', {
       id: id,
       firstname: first,
       lastname: last,
       state: state,
-      image: null,
+      image: photo,
       interests: interests,
       title: title,
       STORAGE_KEY: token
     });
+    
   }
 
   _userLogin() {
     var value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
-      fetch("http://192.168.0.79:3001/sessions/create", {
+      fetch("http://104.236.79.194:3001/sessions/create", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -75,7 +76,7 @@ class LogIn extends Component {
         if (response.message) {
           Alert.alert("You may have misspelled your email or password.");
         } else {
-          this._saveUser(response.user.id, response.user.firstname, response.user.lastname, response.user.state, response.user.title, response.user.interests, response.id_token);
+          this._saveUser(response.user.id, response.user.firstname, response.user.lastname, response.user.state, response.user.title, response.user.interests, response.user.photo, response.id_token);
           Alert.alert(
             "Login Success!"
           );
