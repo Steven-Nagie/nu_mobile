@@ -57,6 +57,44 @@ class LogIn extends Component {
 
   }
 
+  async _saveScore(total, transport, energy, water, food, waste) {
+    try {
+      await store.save('score', {
+        total: total,
+        transport: transport,
+        energy: energy,
+        water: water,
+        waste: waste,
+        food: food
+      });
+    } catch(err) {
+      Alert.alert(err);
+    }
+  }
+
+  _fetchScores(id, token) {
+    fetch("http://104.236.79.194:3001/scores/get", {
+      method: "PUT",
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userid: id
+      })
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.status) {
+        return;
+      } else {
+        this._saveScore(response.total, response.transport, response.energy, response.water, response.waste, response.food);
+      }
+    })
+    .done();
+  }
+
   _userLogin() {
     var value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
@@ -76,6 +114,7 @@ class LogIn extends Component {
         if (response.message) {
           Alert.alert("You may have misspelled your email or password.");
         } else {
+          this._fetchScores(response.user.id, response.id_token);
           this._saveUser(response.user.id, response.user.firstname, response.user.lastname, response.user.state, response.user.title, response.user.interests, response.user.photo, response.id_token);
           Alert.alert(
             "Login Success!"

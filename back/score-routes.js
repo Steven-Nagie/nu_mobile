@@ -16,6 +16,16 @@ var jwtCheck = jwt({
 
 app.use('/scores', jwtCheck);
 
+app.put('/scores/get', function(req, res, next) {
+  db.get_scores([req.body.userid], function(err, score) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(score[0]);
+    }
+  })
+});
+
 app.put('/scores/transport', function(req, res, next) {
   db.update_transport([req.body.total, req.body.transport, req.body.id], function(err, score) {
     if (err) {

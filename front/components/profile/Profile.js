@@ -30,6 +30,8 @@ let height;
 let profilePic;
 let score;
 let percent;
+let AUTH_TOKEN;
+let userid;
 
 class Profile extends Component {
   constructor(props) {
@@ -56,6 +58,8 @@ class Profile extends Component {
         console.log('There is no store data');
       } else {
         this.props.dispatch(createUser(user));
+        AUTH_TOKEN = user.STORAGE_KEY;
+        userid = user.id;
       }
     } catch(err) {
       console.log(err);
@@ -75,6 +79,8 @@ class Profile extends Component {
           emissionsPercent: (Math.round(score.total / 1980.45) * 100),
           foodScore: score.food
         })
+      } else {
+        return;
       }
     } catch(err) {
       Alert.alert(err)

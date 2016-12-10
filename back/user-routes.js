@@ -97,7 +97,6 @@ app.post('/sessions/create', function(req, res, next) {
     if (err) {
       res.status(500).json(err);
     } else if (user[0]) {
-      console.log(user[0]);
       res.status(201).json({
         id_token: createToken(user),
         user: user[0]
