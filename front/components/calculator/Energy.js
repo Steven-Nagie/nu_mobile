@@ -68,7 +68,7 @@ class Energy extends Component {
       energy: energyScore
     });
     //Send score to database
-    fetch("http://104.236.79.194:3001/scores/energy", {
+    fetch("http://192.168.0.79:3001/scores/energy", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,

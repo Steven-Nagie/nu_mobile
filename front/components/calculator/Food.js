@@ -102,7 +102,7 @@ class Food extends Component {
     // Save score to simple-store
     this._updateStore();
     //Send score to database
-    fetch("http://104.236.79.194:3001/scores/food", {
+    fetch("http://192.168.0.79:3001/scores/food", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,

@@ -18,6 +18,7 @@ import {createUser} from '../../ducks/userDuck.js';
 import store from 'react-native-simple-store';
 var Platform = require('react-native').Platform;
 var ImagePicker = require('react-native-image-picker');
+import { RNS3 } from 'react-native-aws3';
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -42,6 +43,11 @@ let height;
 let photo;
 let userId;
 let AUTH_TOKEN;
+let sendPhotoStyles;
+let access;
+let secretAccess;
+let flag = true;
+let imageLocation;
 
 class Settings extends Component {
   constructor(props) {
@@ -50,7 +56,8 @@ class Settings extends Component {
     this.state = {
       interests: "Interests",
       title: "Title",
-      avatarSource: null
+      avatarSource: null,
+      sendSource: null
     }
   }
 
@@ -81,7 +88,7 @@ class Settings extends Component {
   }
 
   _sendInterests() {
-    fetch("http://104.236.79.194:3001/users/interests", {
+    fetch("http://192.168.0.79:3001/users/interests", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -92,6 +99,11 @@ class Settings extends Component {
         interests: this.state.interests,
         id: userId
       })
+    })
+    .then(function(response) {
+      if (response.status !== 201) {
+        Alert.alert("That didn't work, try again");
+      }
     })
     .done();
   }
@@ -109,7 +121,7 @@ class Settings extends Component {
   }
 
   _sendTitle() {
-    fetch("http://104.236.79.194:3001/users/title", {
+    fetch("http://192.168.0.79:3001/users/title", {
       method: "PUT",
       headers: {
         'Authorization': 'Bearer ' + AUTH_TOKEN,
@@ -121,12 +133,18 @@ class Settings extends Component {
         id: userId
       })
     })
+    .then(function(response) {
+      if (response.status !== 201) {
+        Alert.alert("That didn't work, try again");
+      }
+    })
     .done();
   }
 
+
+  /************PHOTO STUFF**************/
   _getPhoto() {
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
 
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -140,6 +158,7 @@ class Settings extends Component {
       else {
         // You can display the image using either data...
         const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        const sourceForS3 = response.uri;
 
         // or a reference to the platform specific asset location
         if (Platform.OS === 'ios') {
@@ -149,9 +168,11 @@ class Settings extends Component {
         }
 
         this.setState({
-          avatarSource: source
+          avatarSource: source,
+          sendSource: sourceForS3
         });
-        this._submitPhoto(source)
+        this._submitPhoto(source);
+        this._getAccess();
       }
     });
   }
@@ -167,6 +188,74 @@ class Settings extends Component {
     }
   }
 
+  _getAccess() {
+    fetch("http://192.168.0.79:3001/photos/access", {
+      method: "GET",
+      headers: {
+        'Authorization': 'Bearer ' + AUTH_TOKEN,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+    .then(function(response) {
+      access = response.access;
+      secretAccess = response.secretAccess;
+    })
+    .done();
+  }
+
+
+
+  _sendPhoto() {
+    let file = {
+      uri: this.state.sendSource,
+      name: userId + " pic " + new Date(),
+      type: "image/jpeg"
+    };
+
+    let sendOptions = {
+      keyPrefix: "uploads/",
+      bucket: "nu-photos",
+      region: "us-east-1",
+      accessKey: access,
+      secretKey: secretAccess,
+      successActionStatus: 201
+    };
+
+      RNS3.put(file, sendOptions).progress((e) => console.log(e.loaded / e.total)).then(response => {
+        if (response.status !== 201) {
+          throw new Error("Failed to upload image to S3");
+          console.log(response);
+        } else {
+          imageLocation = response.body.postResponse.location;
+          this._sendPhotoHome();
+        }
+      }).catch(err => {
+        Alert.alert(err);
+      });
+    }
+
+    _sendPhotoHome() {
+      fetch("http://192.168.0.79:3001/photos/upload", {
+        method: "PUT",
+        headers: {
+          'Authorization': 'Bearer ' + AUTH_TOKEN,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          photo: imageLocation,
+          id: userId
+        })
+      })
+      .then(function(response) {
+        if (response.status !== 201) {
+          Alert.alert("That didn't work, try again");
+        }
+      })
+      .done();
+    }
+
   componentWillMount() {
     this._checkUser();
   }
@@ -177,6 +266,13 @@ class Settings extends Component {
       photo =  <Image source={this.state.avatarSource} style={{height: 50, width: 50, borderRadius: 50}} />
     } else {
       photo = <View style={stylesSettings.placeholder} />
+    }
+    if (!flag) {
+      sendPhotoStyles = stylesSettings.buttonOff;
+      sendPhotoText = stylesSettings.buttonTextOff;
+    } else {
+      sendPhotoStyles = stylesSettings.button;
+      sendPhotoText = stylesSettings.buttonText;
     }
     return(
       <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
@@ -216,9 +312,14 @@ class Settings extends Component {
         <View style={stylesSettings.updateContainer}>
           <Text style={[styles.text, {marginBottom: 10}]}>Update your photo</Text>
           {photo}
-          <TouchableHighlight style={[stylesSettings.button, {alignSelf: 'center', marginTop: 10}]} onPress={this._getPhoto.bind(this)}>
-            <Text style={stylesSettings.buttonText}>Update Photo</Text>
-          </TouchableHighlight>
+          <View style={stylesSettings.buttonHolder}>
+            <TouchableHighlight style={[stylesSettings.button, {alignSelf: 'center', marginTop: 10, marginRight: 10}]} onPress={this._getPhoto.bind(this)}>
+              <Text style={stylesSettings.buttonText}>Take Photo</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={[sendPhotoStyles, {alignSelf: 'center', marginTop: 10}]} onPress={this._sendPhoto.bind(this)}>
+              <Text style={sendPhotoText}>Send Photo</Text>
+            </TouchableHighlight>
+          </View>
         </View>
 
         <View style={styles.footer}>
@@ -246,8 +347,23 @@ const stylesSettings = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center'
   },
+  buttonTextOff: {
+    fontSize: 14,
+    color: '#8bd1ca',
+    alignSelf: 'center',
+    textAlign: 'center'
+  },
   button: {
     backgroundColor: '#8bd1ca',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 35,
+    width: 70
+  },
+  buttonOff: {
+    borderColor: '#8bd1ca',
+    borderWidth: 1,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -259,6 +375,9 @@ const stylesSettings = StyleSheet.create({
     width: 50,
     borderRadius: 50,
     backgroundColor: '#d8d8d8'
+  },
+  buttonHolder: {
+    flexDirection: 'row'
   }
 })
 

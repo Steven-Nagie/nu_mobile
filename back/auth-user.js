@@ -24,3 +24,39 @@ app.get('/auth',
       }
     }
 );
+
+app.put('/users/title', jwt({secret: config.secret}), function(req, res, next) {
+  db.update_title([req.body.title, req.body.id], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.sendStatus(201);
+    }
+  })
+})
+
+app.put('/users/interests', jwt({secret: config.secret}), function(req, res, next) {
+  db.update_interests([req.body.interests, req.body.id], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.sendStatus(201);
+    }
+  })
+})
+
+app.get('/photos/access', jwt({secret: config.secret}), function(req, res, next) {
+
+  var access = {access: config.amazonAccess, secretAccess: config.amazonSecretAccess};
+  res.json(access);
+})
+
+app.put('/photos/upload', jwt({secret: config.secret}), function(req, res, next) {
+  db.update_photo([req.body.photo, req.body.id], function(err, user) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.sendStatus(201);
+    }
+  })
+})
