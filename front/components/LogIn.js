@@ -54,7 +54,7 @@ class LogIn extends Component {
       title: title,
       STORAGE_KEY: token
     });
-    
+
   }
 
   _userLogin() {

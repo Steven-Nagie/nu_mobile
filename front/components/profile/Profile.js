@@ -16,6 +16,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {createUser} from '../../ducks/userDuck.js';
 import store from 'react-native-simple-store';
+import LinearGradient from 'react-native-linear-gradient';
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -27,11 +28,23 @@ import Followers from './Followers';
 let width;
 let height;
 let profilePic;
+let score;
+let percent;
 
 class Profile extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      totalScore: 0,
+      transportScore: 0,
+      energyScore: 0,
+      waterScore: 0,
+      wasteScore: 0,
+      foodScore: 0,
+      emissionsPercent: 0,
+      earths: "so many",
+    }
   }
 
 
@@ -49,19 +62,31 @@ class Profile extends Component {
     }
   }
 
-  async _userLogout() {
+  async _getScore() {
     try {
-      await store.delete('user');
-      Actions.logOrSign();
-      Alert.alert("Logout Success!");
-    } catch (error) {
-      console.log('Storage error: ' + error.message);
+      const score = await store.get('score');
+      if(score){
+        this.setState({
+          totalScore: score.total,
+          transportScore: score.transport,
+          energyScore: score.energy,
+          waterScore: score.water,
+          wasteScore: score.waste,
+          emissionsPercent: (Math.round(score.total / 1980.45) * 100),
+          foodScore: score.food
+        })
+      }
+    } catch(err) {
+      Alert.alert(err)
     }
   }
+
+
 
 /*******COMPONENT FUNCTIONS********/
   componentWillMount() {
     this._checkUser();
+    this._getScore();
   }
 
   //******* RENDER COMPONENT *******
@@ -74,8 +99,15 @@ class Profile extends Component {
       profilePic =
         <Image style={styles.profilePic} source={{uri: this.props.user.image}} />
     }
+    if (!this.state.totalScore) {
+      score = 0;
+      percent = 0;
+    } else {
+      score = this.state.totalScore;
+      percent = this.state.emissionsPercent;
+    }
     return(
-      <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
+      <TouchableWithoutFeedback style={{flex:1, height: 2000}} onPress={() => dismissKeyboard()}>
         <View style={styles.main}>
           <View style={styles.header}>
             <Header />
@@ -90,7 +122,7 @@ class Profile extends Component {
 
               <View style={[styles.bannerLinks, {width: width}]}>
                 <Text style={styles.linkText}>Feed</Text>
-                <Text style={styles.linkText}>Followers</Text>
+                <Text style={[styles.linkText, {color: '#35b6a5'}]}>Followers</Text>
                 <Text style={styles.linkText}>Following</Text>
               </View>
 
@@ -103,6 +135,22 @@ class Profile extends Component {
                   <Image source={require('../../images/location-pin.png')} />
                   <Text style={styles.location}>{this.props.user.state}</Text>
                 </View>
+
+                <View style={styles.score}>
+                  <Text style={styles.scoreText}>Monthly emissions: <Text style={[styles.scoreText, {fontFamily: 'OpenSans-Bold'}]}>{score}</Text></Text>
+                  <View style={[styles.emissionsCounterView, {width: width * .6}]}>
+                    <LinearGradient
+                      start={[0.0, 0.5]}
+                      end={[1.0, 1.0]}
+                      colors={['rgba(99, 202, 192, 1)', 'rgba(181, 222, 109, 1)', 'rgba(252, 215, 118, 1)', 'rgba(249, 129, 97, 1)']}
+                      style={{height: 25, width: (width * .3) * {percent}, borderRadius: 50}} />
+                  </View>
+                  <Text style={[styles.scoreText, {width: width * .6}]}><Text style={[styles.scoreText, {fontFamily: 'OpenSans-Bold'}]}>{percent}%</Text> of the monthly US national allowance</Text>
+                </View>
+
+                <View style={[styles.interestsView, {width: width * .6}]}>
+                  <Text style={styles.interestsText}>{this.props.user.interests}</Text>
+                </View>
               </View>
 
             </Image>
@@ -114,12 +162,6 @@ class Profile extends Component {
             </View>
 
           </ScrollView>
-
-          <View style={[styles.buttonContainer, {width: width}]}>
-            <TouchableHighlight style={styles.button} onPress={this._userLogout.bind(this)}>
-            <Text style={styles.buttonText}>Log Out</Text>
-            </TouchableHighlight>
-          </View>
 
           <View style={styles.footer}>
             <Footer />
@@ -135,7 +177,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    top: 0,
+    top: 0
   },
   contentContainer: {
     flex: 1,
@@ -147,7 +189,7 @@ const styles = StyleSheet.create({
   //Begin Profile styles
   banner: {
     padding: 20,
-    height: 210,
+    height: 300,
     // position: 'absolute',
     // top: -25,
     backgroundColor: 'rgba(0,0,0,0)',
@@ -201,6 +243,28 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'OpenSans-Semibold',
     fontSize: 14
+  },
+  score: {
+    marginTop: 5
+  },
+  scoreText: {
+    fontSize: 12,
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Regular'
+  },
+  emissionsCounterView: {
+    height: 25,
+    borderRadius: 50,
+    borderColor: '#8bd1ca',
+    borderWidth: 1,
+  },
+  interestsView: {
+    marginTop: 5
+  },
+  interestsText: {
+    fontSize: 16,
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Regular',
   },
   // SubScene styles
   subScene: {

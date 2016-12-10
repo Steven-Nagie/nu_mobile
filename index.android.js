@@ -28,6 +28,7 @@ import ChallengeIndex from "./front/components/challenges/ChallengeIndex";
 import Images from "./front/components/ImagePicker";
 import Stats from "./front/components/Stats";
 import Settings from './front/components/profile/Settings.js';
+import About from './front/components/About.js';
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -44,12 +45,6 @@ export default class nu extends Component {
         <RouterWithRedux>
           <Scene key="root">
 
-                <Scene
-                  key="images"
-                  component={Images}
-                  title="cukkkkk"
-                  hideNavBar
-                />
                 <Scene
                   key="loading"
                   component={Loading}
@@ -103,6 +98,12 @@ export default class nu extends Component {
                   key="settings"
                   component={Settings}
                   title="Settings"
+                  hideNavBar
+                />
+                <About
+                  key="about"
+                  component={About}
+                  title="About"
                   hideNavBar
                 />
 
