@@ -86,7 +86,6 @@ class Calculator extends Component {
     let {height, width} = Dimensions.get("window");
     let calcIconsCurrent = calcIcons[this.props.calcComponent];
     return(
-      <TouchableWithoutFeedback onPress={() => dismissKeyboard()}>
       <View style={styles.main}>
         <View style={styles.header}>
           <Header />
@@ -123,7 +122,6 @@ class Calculator extends Component {
           <Footer />
         </View>
       </View>
-      </TouchableWithoutFeedback>
     )
   }//End of render statement
 

@@ -113,7 +113,6 @@ class Profile extends Component {
       percent = this.state.emissionsPercent;
     }
     return(
-      <TouchableWithoutFeedback style={{flex:1, height: 2000}} onPress={() => dismissKeyboard()}>
         <View style={styles.main}>
           <View style={styles.header}>
             <Header />
@@ -173,7 +172,6 @@ class Profile extends Component {
             <Footer />
           </View>
         </View>
-      </TouchableWithoutFeedback>
     )
   }
 }

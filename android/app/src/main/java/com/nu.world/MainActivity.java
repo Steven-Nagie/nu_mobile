@@ -1,4 +1,4 @@
-package com.nu;
+package com.nu.world;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;

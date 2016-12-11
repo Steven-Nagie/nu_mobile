@@ -31,7 +31,6 @@ export default class About extends Component {
 
   render() {
     return(
-      <TouchableWithoutFeedback style={{flex:1, height: 2000}} onPress={() => dismissKeyboard()}>
       <View style={styles.main}>
         <View style={styles.header}>
           <Header />
@@ -48,7 +47,6 @@ export default class About extends Component {
           <Footer />
         </View>
       </View>
-      </TouchableWithoutFeedback>
     )
   }
 }
