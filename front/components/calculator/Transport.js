@@ -95,7 +95,7 @@ class Transport extends Component {
   async _airCalc() {
 
     var flights = this.refs.form.getValue();
-    var flightTotal = flights.totalFlights * 715;
+    var flightTotal = (flights.totalFlights * 715)/12;
     transportScore += flightTotal;
     totalScore += transportScore;
     // Save score to simple-store
