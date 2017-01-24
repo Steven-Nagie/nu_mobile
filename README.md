@@ -1,5 +1,7 @@
 # nu.world Mobile Version
 
+![logo](./front/images/nu-colorr)
+
 ### Overview
 
 nu.world is an environmentally conscious social media app. It's built around an environmental tool called a carbon calculator. Users input information about their lifestyles, such as how much they drive and how much water they use, and the calculator outputs the user's calculated carbon emissions.
