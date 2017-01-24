@@ -11,5 +11,12 @@ Users can customize their profile, go through the calculator and see stats about
 * Node.js
 * JSON Web Tokens
 * PostgreSQL
+* Amazon S3
 
-### DataBase
+### Database
+
+The PostgreSQL database stores: 
+  * User information, including login information and a link to the S3 storage location for their profile picture.
+  * Calculated emissions data, with a foreign key to the proper user
+ 
+ S3 contains all user uploaded photos.
