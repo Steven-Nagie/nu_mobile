@@ -1,6 +1,6 @@
 # nu.world Mobile Version
 
-![logo](./front/images/nu-colorr)
+![logo](./front/images/nu-colorr.png)
 
 ### Overview
 
