@@ -16,6 +16,22 @@ Users can customize their profile, go through the calculator and see stats about
 ### Log-In/Sign-Up
 ![log-or-sign screenshot](./front/images/screen_log.png)
 
+### Main Profile
+![main screenshot](./front/images/screen_main.png)
+
+### Edit Profile
+![edit profile screenshot](./front/images/screen_edit_profile.png)
+
+### Carbon Calculator
+![calculator start](./front/images/nu1.png)
+![calculator mid](./front/images/nu4.png)
+
+### Stats Page
+![stats screenshot](./front/images/nu3.png)
+
+### Challenges
+![challenges screen](./front/images/nu2.png)
+
 ### Database
 
 The PostgreSQL database stores: 
