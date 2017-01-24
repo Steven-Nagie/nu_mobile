@@ -1,3 +1,12 @@
+January 18, can't get past the loading page.  One of two things is happening. Either it's having trouble accessing the store, so it doesn't know whether or not there's a user and get move past there, OR, it knows there is a logged in user but it can't get an auth token from the server.
+To troubleshoot:
+Plug in phone
+Set up console logs in both loading.js (to see if there's a user or not, or whether it can't access the store at all)
+Set up console logs in server, wherever auth is
+Go from there. 
+
+
+
 Samsung s5 ratio is 360X640
 **Probably better to do it in flex, isn't it?
 
