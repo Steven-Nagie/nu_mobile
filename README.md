@@ -13,6 +13,9 @@ Users can customize their profile, go through the calculator and see stats about
 * PostgreSQL
 * Amazon S3
 
+### Log-In/Sign-Up
+![log-or-sign screenshot](./front/images/screen_log.png)
+
 ### Database
 
 The PostgreSQL database stores: 
